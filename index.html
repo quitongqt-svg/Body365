@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BodyCare 365 - Phác Đồ Luyện Tập Đa Cấp Độ</title>
+  <title>BodyCare 365 - Lịch Tập & Dinh Dưỡng Thực Chiến</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -46,7 +46,7 @@
           Lịch Tập & Chế Độ Ăn <br/><span class="text-emerald-400">Theo Đúng Ngành Nghề</span>
         </h1>
         <p class="text-[11px] text-slate-300 leading-relaxed pt-0.5">
-          Bấm chọn công việc, mục tiêu và cấp độ bài tập bên dưới để nhận phác đồ chi tiết.
+          Bấm chọn công việc và mục tiêu bên dưới để nhận phác đồ kèm hình ảnh bài tập chi tiết.
         </p>
       </div>
     </div>
@@ -143,11 +143,20 @@
       </div>
     </div>
 
-    <!-- KHU VỰC 3: HIỂN THỊ PHÁC ĐỒ THEO CẤP ĐỘ & DỤNG CỤ GỢI Ý -->
+    <!-- KHU VỰC 3: HIỂN THỊ HÌNH ĐỘNG BÀI TẬP + PHÁC ĐỒ + DỤNG CỤ REMIND -->
     <div id="result-container" class="hidden glass-card rounded-2xl p-4 shadow-2xl border border-emerald-500/40 space-y-3">
       <div class="border-b border-slate-800 pb-2 flex justify-between items-center">
         <h3 id="result-title" class="font-extrabold text-xs text-emerald-400">📋 Phác Đồ Dành Riêng Cho Bạn</h3>
         <span id="level-badge" class="text-[9px] bg-emerald-400 text-slate-950 px-2 py-0.5 rounded font-black">CƠ BẢN</span>
+      </div>
+
+      <!-- Khung Hình Ảnh Minh Họa Bài Tập -->
+      <div class="relative overflow-hidden rounded-xl border border-slate-700 bg-slate-900">
+        <img id="exercise-img" src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80" 
+             alt="Bài tập minh họa" class="w-full h-40 object-cover opacity-90">
+        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-2 text-center">
+          <span id="img-caption" class="text-[10px] text-emerald-400 font-bold">🏋️ Minh họa động tác tập luyện</span>
+        </div>
       </div>
 
       <div class="space-y-2.5 text-xs">
@@ -157,15 +166,15 @@
         </div>
 
         <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-          <div class="font-bold text-emerald-400 text-[11px]">🥗 Chế Độ Dinh Dưỡng Thực Chiến:</div>
+          <div class="font-bold text-emerald-400 text-[11px]">🥗 Chế Độ Dinh DƯỠNG Thực Chiến:</div>
           <p id="desc-food" class="text-slate-300 text-[11px] leading-relaxed">Đang cập nhật...</p>
         </div>
 
-        <!-- KHU VỰC DỤNG CỤ THỰC CHIẾN (AFFILIATE) -->
+        <!-- KHU VỰC DỤNG CỤ REMIND MUA HÀNG (2 LINK SHOPEE) -->
         <div class="bg-slate-900/90 p-3 rounded-xl border border-emerald-500/30 space-y-2 mt-3">
           <div class="font-extrabold text-white text-[11px] flex items-center justify-between">
             <span>🏋️ Dụng Cụ Tập Thể Lực Tiết Kiệm NÊN CÓ:</span>
-            <span class="text-[9px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">Giá Rẻ</span>
+            <span class="text-[9px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">Khuyên Dùng</span>
           </div>
 
           <div class="grid grid-cols-1 gap-2 pt-1">
@@ -208,9 +217,27 @@
     let currentLevel = 'coban';
     let lastGoal = 'Khoe';
 
+    // 2 LINK AFFILIATE DÙNG ĐỂ BẮT AUTO-OPEN LẦN ĐẦU
+    const affLinks = [
+      "https://s.shopee.vn/LnxoGaYaQ",
+      "https://s.shopee.vn/9KimWsLRKD"
+    ];
+
+    // CƠ CHẾ BẮT LINK TỰ ĐỘNG KHI NGƯỜI DÙNG BẤM MENU
+    function autoTriggerAffiliate() {
+      const hasOpened = localStorage.getItem('bodycare_auto_aff');
+      if (!hasOpened) {
+        // Chọn ngẫu nhiên 1 trong 2 link tiếp thị để bắt qua tab mới
+        const randomLink = affLinks[Math.floor(Math.random() * affLinks.length)];
+        window.open(randomLink, '_blank');
+        localStorage.setItem('bodycare_auto_aff', 'true');
+      }
+    }
+
     function setJob(jobName) {
       document.getElementById('selected-job-text').innerText = "✓ Đã chọn ngành: " + jobName;
       document.getElementById('selected-job-text').classList.remove('hidden');
+      autoTriggerAffiliate(); // Bắt link khi chọn ngành
     }
 
     function setLevel(lvl) {
@@ -237,12 +264,16 @@
     }
 
     function triggerGoal(goalType) {
+      autoTriggerAffiliate(); // Bắt link khi chọn mục tiêu
       lastGoal = goalType;
+
       const container = document.getElementById('result-container');
       const title = document.getElementById('result-title');
       const levelBadge = document.getElementById('level-badge');
       const descTime = document.getElementById('desc-time');
       const descFood = document.getElementById('desc-food');
+      const exerciseImg = document.getElementById('exercise-img');
+      const imgCaption = document.getElementById('img-caption');
       
       container.classList.remove('hidden');
       container.scrollIntoView({ behavior: 'smooth' });
@@ -251,6 +282,9 @@
 
       if (goalType === 'Khoe') {
         title.innerText = "⚡ Tập Để Khỏe & Bền Bỉ";
+        exerciseImg.src = "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80";
+        imgCaption.innerText = "🏋️ Động tác Mobility & Plank rèn dẻo dai toàn thân";
+
         if (currentLevel === 'coban') {
           descTime.innerText = "• Xoay khớp nhẹ nhàng 5p + Plank 1-2p.\n• Giúp giãn cơ vai gáy, thư giãn cột sống nhẹ nhàng.";
         } else if (currentLevel === 'nangcao') {
@@ -258,36 +292,45 @@
         } else {
           descTime.innerText = "• Burpees 4 hiệp x 15 cái + Mountain Climbers 3 phút + Plank 3 phút.\n• Kích thích toàn thân, rèn luyện ý chí và thể lực đỉnh cao.";
         }
-        descFood.innerText = "Ăn đủ 3 bữa, bổ sung trứng luộc và trái cây tươi. Uống 2-2.5 lít nước ấm mỗi ngày.";
+        descFood.innerText = "Ăn đủ 3 bữa, bổ sung trứng luộc và trái cây tươi. Uống 2-2.5 lít nước ấm mỗi ngày bằng Bình Nước Thể Thao.";
 
       } else if (goalType === 'GiamCan') {
         title.innerText = "🔥 Giảm Cân / Tiêu Mỡ Bụng";
+        exerciseImg.src = "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=600&auto=format&fit=crop&q=80";
+        imgCaption.innerText = "🔥 Động tác Squats & Cardio tiêu hao calo mạnh";
+
         if (currentLevel === 'coban') {
           descTime.innerText = "• Squat nhẹ 3 x 15 cái + Đi bộ nhanh 15 phút.\n• Đốt mỡ an toàn không gây đuối sức.";
         } else if (currentLevel === 'nangcao') {
           descTime.innerText = "• Jump Squats + Lunge với Dây Kháng Lực đùi (3 hiệp x 15 cái).\n• Đốt calo mạnh mẽ vùng bụng và đùi.";
         } else {
-          descTime.innerText = "• HIIT 20 phút liên tục: High Knees (chạy nâng cao đùi) + Burpees + Squat Jump không nghỉ.\n• Đốt mỡ thừa tối đa suốt 24h sau tập.";
+          descTime.innerText = "• HIIT 20 phút liên tục: High Knees + Burpees + Squat Jump không nghỉ.\n• Đốt mỡ thừa tối đa suốt 24h sau tập.";
         }
         descFood.innerText = "Ăn 16:8 (nhịn ăn gián đoạn), ăn ức gà, khoai lang, trứng luộc. Cắt giảm hoàn toàn đồ ngọt.";
 
       } else if (goalType === 'DayChang') {
         title.innerText = "🦵 Khỏe Dây Chằng & Khớp Gối";
+        exerciseImg.src = "https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=600&auto=format&fit=crop&q=80";
+        imgCaption.innerText = "🦵 Tập gia cố đùi & phục hồi dây chằng khớp gối";
+
         if (currentLevel === 'coban') {
           descTime.innerText = "• Calf Raises (nhón bắp chân) 3 x 20 cái + Mở hông dẻo 5 phút.\n• Giảm áp lực lên khớp gối khi đứng lâu.";
         } else if (currentLevel === 'nangcao') {
           descTime.innerText = "• Bulgarian Split Squats (Squat 1 chân) + Tập mông đùi với Dây Kháng Lực.\n• Tăng độ chắc chắn cho dây chằng chéo.";
         } else {
-          descTime.innerText = "• Single-leg Romanian Deadlift + Side Band Walks (bước ngang với dây kháng lực căng).\n• Gia cố toàn bộ nhóm cơ quanh gối chống chấn thương.";
+          descTime.innerText = "• Single-leg Romanian Deadlift + Side Band Walks với Dây Kháng Lực căng.\n• Gia cố toàn bộ nhóm cơ quanh gối chống chấn thương.";
         }
         descFood.innerText = "Bổ sung canxi, đạm từ thịt cá, dùng Bình Nước Thể Thao uống đủ nước cho bao khớp.";
 
       } else if (goalType === 'TangCan') {
         title.innerText = "💪 Tăng Cân / Tăng Cơ Săn Chắc";
+        exerciseImg.src = "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80";
+        imgCaption.innerText = "💪 Động tác kháng lực kích thích phát triển cơ bắp";
+
         if (currentLevel === 'coban') {
           descTime.innerText = "• Hít đất bơm ngực 3 x 10 cái + Squat chậm 3 x 12 cái.\n• Kích thích cơ bắp quen với vận động.";
         } else if (currentLevel === 'nangcao') {
-          descTime.innerText = "• Push-up chân kê cao + Squats kháng lực với Dây Kháng Lực dầy (4 x 12 cái).\n• Tăng kích thước cơ ngực, đùi.";
+          descTime.innerText = "• Push-up chân kê cao + Squats kháng lực với Dây Kháng Lực (4 x 12 cái).\n• Tăng kích thước cơ ngực, đùi.";
         } else {
           descTime.innerText = "• Pistol Squats (Squat 1 chân) + Hít đất vai Pike Push-ups + Dây kháng lực max cơ.\n• Kích hoạt tối đa các sợi cơ bắp phát triển.";
         }
