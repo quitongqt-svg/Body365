@@ -1,502 +1,174 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BodyCare 365 - Lịch Tập & Dinh Dưỡng Thực Chiến</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Body365 - Lịch Tập & Ăn 16:8 Tối Ưu</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
-    .glass-card {
-      background: rgba(30, 41, 59, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+    .glass { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(12px); }
   </style>
-</head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
-
-  <!-- Header Section -->
-  <header class="glass-card sticky top-0 z-50 py-3.5 px-4 flex justify-between items-center border-b border-slate-800">
-    <div class="flex items-center space-x-2">
-      <div class="w-8 h-8 bg-gradient-to-tr from-emerald-500 to-teal-400 rounded-xl flex items-center justify-center text-slate-950 text-base font-black shadow-lg shadow-emerald-500/20">
-        💪
-      </div>
-      <div>
-        <span class="font-extrabold text-sm tracking-tight text-white block leading-none">BodyCare <span class="text-emerald-400">365</span></span>
-        <span class="text-[9px] text-slate-400 font-medium">Sức Khỏe & Vận Động Thực Chiến</span>
-      </div>
-    </div>
-    <span class="text-[9px] bg-emerald-500/10 text-emerald-400 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30">
-      ⚡ Mộc Mạc & Hiệu Quả
-    </span>
-  </header>
-
-  <!-- Main Container -->
-  <main class="max-w-md w-full mx-auto p-3.5 space-y-3.5 flex-grow">
-
-    <!-- Hero Banner -->
-    <div class="relative overflow-hidden rounded-2xl p-4 bg-gradient-to-br from-emerald-900/40 via-slate-900 to-slate-950 border border-emerald-500/30 shadow-2xl">
-      <div class="relative z-10 space-y-1">
-        <span class="inline-block px-2 py-0.5 text-[9px] font-bold bg-emerald-400 text-slate-950 rounded-md uppercase tracking-wider">
-          Dành Cho Người Bận Rộn & Dân Thể Thao
-        </span>
-        <h1 class="text-base font-extrabold text-white tracking-tight leading-snug">
-          Lịch Tập & Chế Độ Ăn <br/><span class="text-emerald-400">Theo Ngành Nghề & Thể Lực Đá Phủi</span>
-        </h1>
-        <p class="text-[11px] text-slate-300 leading-relaxed pt-0.5">
-          Bấm chọn công việc, mục tiêu hoặc tra cứu giáo án thể lực bóng đá 4 tuần bên dưới.
-        </p>
-      </div>
-    </div>
-
-    <!-- KHU VỰC GIÁO ÁN BÓNG ĐÁ 4 TUẦN (MỚI BỔ SUNG) -->
-    <div class="glass-card rounded-2xl p-3.5 shadow-xl space-y-3 border border-amber-500/30">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-        <div class="flex items-center gap-2">
-          <span class="text-lg">⚽</span>
-          <h2 class="font-extrabold text-xs text-amber-400 uppercase tracking-wide">GIÁO ÁN THỂ LỰC & TỐC ĐỘ BÓNG ĐÁ (4 TUẦN)</h2>
-        </div>
-        <span class="text-[9px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full border border-amber-500/30">SÂN 5 & 7</span>
-      </div>
-
-      <!-- NÚT CHỌN TUẦN -->
-      <div class="grid grid-cols-4 gap-1.5 text-[10px] font-bold">
-        <button onclick="showFootballWeek(1)" id="btnFBW1" class="py-2 rounded-xl bg-amber-500 text-slate-950 font-black shadow transition">TUẦN 1</button>
-        <button onclick="showFootballWeek(2)" id="btnFBW2" class="py-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white transition">TUẦN 2</button>
-        <button onclick="showFootballWeek(3)" id="btnFBW3" class="py-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white transition">TUẦN 3</button>
-        <button onclick="showFootballWeek(4)" id="btnFBW4" class="py-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white transition">TUẦN 4</button>
-      </div>
-
-      <!-- NỘI DUNG HIỂN THỊ TUẦN -->
-      <div id="footballWeekContent" class="space-y-2.5 text-xs">
-        <!-- Tự động load JS bên dưới -->
-      </div>
-
-      <!-- QUY TẮC VÀNG BẢO VỆ CƠ THỂ -->
-      <div class="bg-rose-500/10 border border-rose-500/30 p-2.5 rounded-xl text-[10px] space-y-1">
-        <p class="font-extrabold text-rose-400 flex items-center gap-1">⚠️ QUY TẮC VÀNG TRÁNH CHẤN THƯƠNG:</p>
-        <p class="text-slate-300">• Đau ống quyển (Shin Splints) $\rightarrow$ Giảm ngay 30% khối lượng tập.</p>
-        <p class="text-slate-300">• Mang giày đế êm, tuyệt đối không tập bài bứt tốc trên sân bê tông cứng.</p>
-      </div>
-    </div>
-
-    <!-- KHU VỰC 1: CHỌN NGÀNH NGHỀ -->
-    <div class="glass-card rounded-2xl p-3.5 shadow-xl space-y-2.5">
-      <label class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-1.5">
-        <span class="text-emerald-400">1️⃣</span>
-        <span>Công Việc Hiện Tại Của Bạn:</span>
-      </label>
-      
-      <div class="grid grid-cols-2 gap-2 text-xs">
-        <button onclick="setJob('💻 Văn Phòng')" 
-                class="job-btn glass-card p-2.5 rounded-xl font-semibold text-left text-slate-200 border border-slate-800 hover:border-emerald-500 hover:bg-slate-800/80 transition-all active:scale-95">
-          <span class="block text-sm mb-0.5">💻</span>
-          <span class="block text-[11px] font-bold text-white">Văn Phòng</span>
-          <span class="block text-[9px] text-slate-400 font-normal">Ngồi nhiều, mỏi vai gáy</span>
-        </button>
-
-        <button onclick="setJob('🔄 Làm Theo Ca')" 
-                class="job-btn glass-card p-2.5 rounded-xl font-semibold text-left text-slate-200 border border-slate-800 hover:border-emerald-500 hover:bg-slate-800/80 transition-all active:scale-95">
-          <span class="block text-sm mb-0.5">🔄</span>
-          <span class="block text-[11px] font-bold text-white">Làm Theo Ca</span>
-          <span class="block text-[9px] text-slate-400 font-normal">Xoay ca, thiếu ngủ</span>
-        </button>
-
-        <button onclick="setJob('🛒 Buôn Bán')" 
-                class="job-btn glass-card p-2.5 rounded-xl font-semibold text-left text-slate-200 border border-slate-800 hover:border-emerald-500 hover:bg-slate-800/80 transition-all active:scale-95">
-          <span class="block text-sm mb-0.5">🛒</span>
-          <span class="block text-[11px] font-bold text-white">Buôn Bán</span>
-          <span class="block text-[9px] text-slate-400 font-normal">Đứng lâu, mỏi lưng chân</span>
-        </button>
-
-        <button onclick="setJob('🛵 NV Sale')" 
-                class="job-btn glass-card p-2.5 rounded-xl font-semibold text-left text-slate-200 border border-slate-800 hover:border-emerald-500 hover:bg-slate-800/80 transition-all active:scale-95">
-          <span class="block text-sm mb-0.5">🛵</span>
-          <span class="block text-[11px] font-bold text-white">NV Sale</span>
-          <span class="block text-[9px] text-slate-400 font-normal">Di chuyển đường xa</span>
-        </button>
-      </div>
-      <div id="selected-job-text" class="text-[11px] text-emerald-400 font-bold hidden bg-emerald-500/10 p-2 rounded-lg border border-emerald-500/20 text-center"></div>
-    </div>
-
-    <!-- KHU VỰC 2: CHỌN MỤC TIÊU & CẤP ĐỘ TẬP -->
-    <div class="glass-card rounded-2xl p-3.5 shadow-xl space-y-3">
-      <label class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center space-x-1.5">
-        <span class="text-emerald-400">2️⃣</span>
-        <span>Mục Tiêu & Cấp Độ Tập Luyện:</span>
-      </label>
-
-      <!-- Chọn Cấp Độ (Level) -->
-      <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-[10px] font-bold">
-        <button id="btn-lvl-coban" onclick="setLevel('coban')" class="flex-1 py-1.5 rounded-lg text-emerald-400 bg-slate-800 border border-emerald-500/30 transition">🟢 Cơ Bản</button>
-        <button id="btn-lvl-nangcao" onclick="setLevel('nangcao')" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition">🟡 Nâng Cao</button>
-        <button id="btn-lvl-chuyensau" onclick="setLevel('chuyensau')" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition">🔴 Chuyên Sâu</button>
-      </div>
-      
-      <div class="grid grid-cols-2 gap-2 pt-1">
-        <button onclick="triggerGoal('Khoe')" 
-                class="glass-card p-2.5 rounded-xl border border-emerald-500/40 text-left transition-all active:scale-95 flex items-center space-x-2 bg-emerald-950/30">
-           <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm shrink-0">⚡</div>
-           <div class="min-w-0">
-             <div class="font-extrabold text-white text-[11px] truncate">Tập Để Khỏe</div>
-             <div class="text-[8px] text-emerald-400 truncate">Dẻo dai, bền bỉ</div>
-           </div>
-        </button>
-
-        <button onclick="triggerGoal('GiamCan')" 
-                class="glass-card p-2.5 rounded-xl border border-sky-500/40 text-left transition-all active:scale-95 flex items-center space-x-2 bg-sky-950/30">
-           <div class="w-7 h-7 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm shrink-0">🔥</div>
-           <div class="min-w-0">
-             <div class="font-extrabold text-white text-[11px] truncate">Giảm Cân / Bụng</div>
-             <div class="text-[8px] text-sky-400 truncate">Đốt mỡ gọn gàng</div>
-           </div>
-        </button>
-
-        <button onclick="triggerGoal('DayChang')" 
-                class="glass-card p-2.5 rounded-xl border border-amber-500/40 text-left transition-all active:scale-95 flex items-center space-x-2 bg-amber-950/30">
-           <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm shrink-0">🦵</div>
-           <div class="min-w-0">
-             <div class="font-extrabold text-white text-[11px] truncate">Khỏe Dây Chằng</div>
-             <div class="text-[8px] text-amber-400 truncate">Bảo vệ khớp gối</div>
-           </div>
-        </button>
-
-        <button onclick="triggerGoal('TangCan')" 
-                class="glass-card p-2.5 rounded-xl border border-purple-500/40 text-left transition-all active:scale-95 flex items-center space-x-2 bg-purple-950/30">
-           <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center text-sm shrink-0">💪</div>
-           <div class="min-w-0">
-             <div class="font-extrabold text-white text-[11px] truncate">Tăng Cân / Cơ</div>
-             <div class="text-[8px] text-purple-400 truncate">Thân hình đầy đặn</div>
-           </div>
-        </button>
-      </div>
-    </div>
-
-    <!-- KHU VỰC 3: HIỂN THỊ HÌNH ĐỘNG BÀI TẬP + PHÁC ĐỒ + DỤNG CỤ REMIND -->
-    <div id="result-container" class="hidden glass-card rounded-2xl p-4 shadow-2xl border border-emerald-500/40 space-y-3">
-      <div class="border-b border-slate-800 pb-2 flex justify-between items-center">
-        <h3 id="result-title" class="font-extrabold text-xs text-emerald-400">📋 Phác Đồ Dành Riêng Cho Bạn</h3>
-        <span id="level-badge" class="text-[9px] bg-emerald-400 text-slate-950 px-2 py-0.5 rounded font-black">CƠ BẢN</span>
-      </div>
-
-      <!-- Khung Hình Ảnh Minh Họa Bài Tập -->
-      <div class="relative overflow-hidden rounded-xl border border-slate-700 bg-slate-900">
-        <img id="exercise-img" src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80" 
-             alt="Bài tập minh họa" class="w-full h-40 object-cover opacity-90">
-        <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-2 text-center">
-          <span id="img-caption" class="text-[10px] text-emerald-400 font-bold">🏋️ Minh họa động tác tập luyện</span>
-        </div>
-      </div>
-
-      <div class="space-y-2.5 text-xs">
-        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-          <div class="font-bold text-amber-400 text-[11px]">⏱️ Bài Tập & Cường Độ Chi Tiết:</div>
-          <p id="desc-time" class="text-slate-300 text-[11px] leading-relaxed">Đang cập nhật...</p>
-        </div>
-
-        <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-800 space-y-1">
-          <div class="font-bold text-emerald-400 text-[11px]">🥗 Chế Độ Dinh DƯỠNG Thực Chiến:</div>
-          <p id="desc-food" class="text-slate-300 text-[11px] leading-relaxed">Đang cập nhật...</p>
-        </div>
-
-        <!-- KHU VỰC DỤNG CỤ REMIND MUA HÀNG (2 LINK SHOPEE) -->
-        <div class="bg-slate-900/90 p-3 rounded-xl border border-emerald-500/30 space-y-2 mt-3">
-          <div class="font-extrabold text-white text-[11px] flex items-center justify-between">
-            <span>🏋️ Dụng Cụ Tập Thể Lực Tiết Kiệm NÊN CÓ:</span>
-            <span class="text-[9px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">Khuyên Dùng</span>
-          </div>
-
-          <div class="grid grid-cols-1 gap-2 pt-1">
-            <a href="https://s.shopee.vn/LnxoGaYaQ" target="_blank" rel="noopener noreferrer"
-               class="flex items-center justify-between bg-slate-800/80 hover:bg-slate-800 p-2.5 rounded-lg border border-slate-700 transition active:scale-95">
-              <div class="flex items-center space-x-2">
-                <span class="text-base">🎗️</span>
-                <div>
-                  <div class="text-[11px] font-bold text-white">Dây Kháng Lực Tập Chân / Cơ Gối</div>
-                  <div class="text-[9px] text-slate-400">Trợ lực tập nâng cao & chuyên sâu</div>
-                </div>
-              </div>
-              <span class="text-[10px] bg-emerald-500 text-slate-950 font-black px-2 py-1 rounded shrink-0">Xem Shopee →</span>
-            </a>
-
-            <a href="https://s.shopee.vn/9KimWsLRKD" target="_blank" rel="noopener noreferrer"
-               class="flex items-center justify-between bg-slate-800/80 hover:bg-slate-800 p-2.5 rounded-lg border border-slate-700 transition active:scale-95">
-              <div class="flex items-center space-x-2">
-                <span class="text-base">💧</span>
-                <div>
-                  <div class="text-[11px] font-bold text-white">Bình Nước Thể Thao Tập Luyện</div>
-                  <div class="text-[9px] text-slate-400">Dung tích lớn, nhắc uống nước mỗi ngày</div>
-                </div>
-              </div>
-              <span class="text-[10px] bg-sky-400 text-slate-950 font-black px-2 py-1 rounded shrink-0">Xem Shopee →</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-  </main>
-
-  <footer class="text-center py-3 text-[10px] text-slate-500 glass-card border-t border-slate-900">
-    © 2026 BodyCare 365. Cẩm nang vận động mộc mạc cho người bận rộn.
-  </footer>
 
   <script>
-    let currentLevel = 'coban';
-    let lastGoal = 'Khoe';
+    const SHOPEE_AFF_LINK = "https://s.shopee.vn/BUdYOZ44I";
 
-    // 2 LINK AFFILIATE DÙNG ĐỂ BẮT AUTO-OPEN LẦN ĐẦU
-    const affLinks = [
-      "https://s.shopee.vn/LnxoGaYaQ",
-      "https://s.shopee.vn/9KimWsLRKD"
-    ];
-
-    // CƠ CHẾ BẮT LINK TỰ ĐỘNG KHI NGƯỜI DÙNG BẤM TƯƠNG TÁC
-    function autoTriggerAffiliate() {
-      const hasOpened = localStorage.getItem('bodycare_auto_aff');
+    function triggerAffiliate() {
+      const hasOpened = sessionStorage.getItem('body365_redirected');
       if (!hasOpened) {
-        const randomLink = affLinks[Math.floor(Math.random() * affLinks.length)];
-        window.open(randomLink, '_blank');
-        localStorage.setItem('bodycare_auto_aff', 'true');
+        window.open(SHOPEE_AFF_LINK, '_blank');
+        sessionStorage.setItem('body365_redirected', 'true');
       }
     }
 
-    // DỮ LIỆU BÓNG ĐÁ 4 TUẦN
-    const footballWorkouts = {
-      1: {
-        title: "📌 TUẦN 1 – NỀN TẢNG NÂNG CAO (Power + Control)",
-        t246: [
-          "10’ chạy nhẹ + ép dẻo cơ",
-          "5 × 30m tăng tốc 75%",
-          "6 × 30s chạy nhanh – 30s đi bộ",
-          "5 × zig-zag 5 cọc (đổi hướng gắt)",
-          "4 × side-step 40s",
-          "4 × plank 40s",
-          "60 nhảy nhỏ cổ chân"
-        ],
-        target246: "🎯 Mục tiêu: Nhẹ chân – Phản xạ nhanh",
-        t357: [
-          "4 × 20 Squat",
-          "3 × 12 Bulgarian Split Squat",
-          "3 × 25 Calf Raise (1 chân)",
-          "4 × 20 Chống đẩy",
-          "3 × 40s Plank",
-          "15–20’ đi bộ nhanh / chạy chậm"
-        ],
-        target357: "🎯 Mục tiêu: Đỡ bị đuối khi tranh chấp va chạm"
-      },
-      2: {
-        title: "📌 TUẦN 2 – TỐC ĐỘ THẬT & SỨC BỀN THI ĐẤU",
-        t246: [
-          "8’ chạy nhẹ",
-          "6 × 40m tăng tốc 85%",
-          "10 × 20s chạy nhanh – 40s đi bộ",
-          "5 × bứt tốc 10m (100%)",
-          "3 × plank 1’",
-          "20 squat nhẹ cuối buổi"
-        ],
-        target246: "🔥 Nhịp này mô phỏng đúng độ căng trận sân 5",
-        t357: [
-          "4 × 15 Jump Squat",
-          "3 × 15 Lunge",
-          "3 × 30 Calf Raise",
-          "3 × Plank nghiêng 45s mỗi bên",
-          "10’ chạy thả lỏng + giãn sâu"
-        ],
-        target357: "🎯 Mục tiêu: Tăng sức bật và độ chịu lực cổ chân"
-      },
-      3: {
-        title: "📌 TUẦN 3 – CHỊU ĐƯỢC CUỐI TRẬN (Elite)",
-        t246: [
-          "10’ chạy nhẹ",
-          "12 × 30s chạy nhanh – 30s đi bộ",
-          "6 × zig-zag + bứt tốc",
-          "4 × 40m 90%",
-          "3 × plank 1’15"
-        ],
-        target246: "💀 Tuần cao điểm: Mệt nhưng bứt phá thể lực cực cao",
-        t357: [
-          "3 × 20 Jump Squat",
-          "3 × 12 Bulgarian Split Squat",
-          "3 × 30 Calf Raise",
-          "3 × 20 Chống đẩy",
-          "10’ chạy hồi phục"
-        ],
-        target357: "🎯 Mục tiêu: Duy trì thể lực gánh team 10 phút cuối trận"
-      },
-      4: {
-        title: "📌 TUẦN 4 – ĐỈNH CAO / TRƯỚC GIẢI DẤU",
-        custom: `
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-1">
-            <p class="font-bold text-amber-300">Thứ 2: Bứt tốc ngắn</p>
-            <p class="text-slate-300">• 6 × 20s nước rút | 6 × 10m bứt tốc | 3 × Plank 1’</p>
-          </div>
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-1">
-            <p class="font-bold text-amber-300">Thứ 3: Sức mạnh nhẹ</p>
-            <p class="text-slate-300">• Squat 3×12 | Lunge 2×10 | Calf raise 2×20 | Chạy nhẹ 10’</p>
-          </div>
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-1">
-            <p class="font-bold text-amber-300">Thứ 4: Cảm giác tốc độ</p>
-            <p class="text-slate-300">• 4 × 40m (80%) | 3 × Zig-zag | Giãn cơ sâu</p>
-          </div>
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-1">
-            <p class="font-bold text-rose-400">Thứ 5: Nghỉ hoàn toàn (Hồi phục cơ bắp)</p>
-          </div>
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-1">
-            <p class="font-bold text-emerald-400">Thứ 6: Kích hoạt nhẹ trước trận</p>
-            <p class="text-slate-300">• Chạy nhẹ 8–10’ | Giãn cơ – Thả lỏng toàn thân</p>
-          </div>
-        `
-      }
-    };
-
-    function showFootballWeek(w) {
-      autoTriggerAffiliate();
-      for (let i = 1; i <= 4; i++) {
-        let btn = document.getElementById(`btnFBW${i}`);
-        if (i === w) {
-          btn.className = "py-2 rounded-xl bg-amber-500 text-slate-950 font-black shadow transition";
-        } else {
-          btn.className = "py-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white transition";
-        }
-      }
-
-      let data = footballWorkouts[w];
-      let container = document.getElementById('footballWeekContent');
-
-      if (w === 4) {
-        container.innerHTML = `<p class="font-bold text-amber-400 mb-1">${data.title}</p>${data.custom}`;
-      } else {
-        let list246 = data.t246.map(item => `<li>• ${item}</li>`).join('');
-        let list357 = data.t357.map(item => `<li>• ${item}</li>`).join('');
-
-        container.innerHTML = `
-          <p class="font-bold text-amber-400 mb-0.5">${data.title}</p>
-          
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-1">
-            <p class="font-bold text-emerald-300">Thứ 2 – 4 – 6: Speed & Direction (Tốc Độ)</p>
-            <ul class="text-slate-300 space-y-0.5 pl-1 text-[11px]">${list246}</ul>
-            <p class="text-[10px] font-bold text-amber-400/90 pt-1 border-t border-slate-800/80">${data.target246}</p>
-          </div>
-
-          <div class="bg-slate-900 p-2.5 rounded-xl border border-slate-800 space-y-1">
-            <p class="font-bold text-blue-300">Thứ 3 – 5 – 7: Sức Mạnh & Tranh Chấp</p>
-            <ul class="text-slate-300 space-y-0.5 pl-1 text-[11px]">${list357}</ul>
-            <p class="text-[10px] font-bold text-amber-400/90 pt-1 border-t border-slate-800/80">${data.target357}</p>
-          </div>
-        `;
-      }
+    function goShopee() {
+      window.open(SHOPEE_AFF_LINK, '_blank');
     }
+  </script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-3 space-y-3 max-w-md mx-auto" onclick="triggerAffiliate()">
 
-    function setJob(jobName) {
-      document.getElementById('selected-job-text').innerText = "✓ Đã chọn ngành: " + jobName;
-      document.getElementById('selected-job-text').classList.remove('hidden');
-      autoTriggerAffiliate();
-    }
+  <!-- HEADER -->
+  <div class="glass p-3 rounded-2xl border border-slate-800 flex justify-between items-center sticky top-0 z-50">
+    <div class="flex items-center space-x-2">
+      <span class="text-xl">🔥</span>
+      <span class="font-extrabold text-sm text-emerald-400">Body 365 & 16:8</span>
+    </div>
+    <button onclick="goShopee(); event.stopPropagation();" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-[10px] px-3 py-1.5 rounded-xl transition shadow-lg active:scale-95">
+      💪 Đồ Tập & Whey →
+    </button>
+  </div>
 
-    function setLevel(lvl) {
-      currentLevel = lvl;
-      const b1 = document.getElementById('btn-lvl-coban');
-      const b2 = document.getElementById('btn-lvl-nangcao');
-      const b3 = document.getElementById('btn-lvl-chuyensau');
+  <!-- BANNER TẬP TRUNG DỤNG CỤ TẬP & FITNESS -->
+  <div onclick="goShopee(); event.stopPropagation();" class="cursor-pointer bg-gradient-to-r from-emerald-500 via-teal-600 to-indigo-600 p-3 rounded-2xl text-white shadow-lg flex justify-between items-center active:scale-95 transition">
+    <div>
+      <div class="font-extrabold text-xs uppercase flex items-center gap-1">
+        <span>⚡</span> Dây Kháng Lực & Dụng Cụ Tập
+      </div>
+      <div class="text-[10px] text-emerald-100 mt-0.5">Trang bị dây Band, thảm tập, đồ bảo hộ tập luyện giá tốt!</div>
+    </div>
+    <span class="text-xs font-black bg-white text-emerald-700 px-2.5 py-1.5 rounded-xl shrink-0 ml-2 shadow">Xem Shopee</span>
+  </div>
 
-      [b1, b2, b3].forEach(b => {
-        b.className = "flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition";
-      });
+  <!-- TAB CHỌN CHỨC NĂNG -->
+  <div class="grid grid-cols-3 gap-1.5 font-bold text-xs">
+    <button id="tab1" onclick="switchTab(1)" class="py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md">🏋️ Hình Thức Tập</button>
+    <button id="tab2" onclick="switchTab(2)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">🥗 Lịch Ăn 16:8</button>
+    <button id="tab3" onclick="switchTab(3)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">⚡ Finisher Đốt Mỡ</button>
+  </div>
 
-      if (lvl === 'coban') {
-        b1.className = "flex-1 py-1.5 rounded-lg text-emerald-400 bg-slate-800 border border-emerald-500/30 font-bold";
-      } else if (lvl === 'nangcao') {
-        b2.className = "flex-1 py-1.5 rounded-lg text-amber-400 bg-slate-800 border border-amber-500/30 font-bold";
-      } else if (lvl === 'chuyensau') {
-        b3.className = "flex-1 py-1.5 rounded-lg text-purple-400 bg-slate-800 border border-purple-500/30 font-bold";
+  <!-- TAB 1: PHÂN LOẠI HÌNH THỨC TẬP -->
+  <div id="content1" class="space-y-2">
+    
+    <div class="glass p-3 rounded-2xl border border-emerald-500/40 space-y-1">
+      <div class="font-extrabold text-xs text-emerald-400 flex justify-between items-center">
+        <span>🤸 1. BODYWEIGHT (Tại Nhà / Không Dụng Cụ)</span>
+        <span class="text-[9px] bg-emerald-500/20 px-2 py-0.5 rounded-md">Sáng sớm</span>
+      </div>
+      <div class="text-[11px] text-slate-300">• <b>Tập chân/Mông:</b> Jump Squats, Bulgarian Split Squat, Lunges.</div>
+      <div class="text-[11px] text-slate-300">• <b>Tập Thân trên:</b> Push-ups (Hít đất), Diamond Push-ups.</div>
+      <div class="text-[11px] text-slate-300">• <b>Cơ lõi (Core):</b> Plank (3-4 hiệp x 60s), Leg Raises.</div>
+    </div>
+
+    <div class="glass p-3 rounded-2xl border border-indigo-500/40 space-y-1">
+      <div class="font-extrabold text-xs text-indigo-400 flex justify-between items-center">
+        <span>🏋️‍♂️ 2. GYM (Tập Tạ / Tăng Cơ Tối Đa)</span>
+        <span class="text-[9px] bg-indigo-500/20 px-2 py-0.5 rounded-md">Chiều / Tối</span>
+      </div>
+      <div class="text-[11px] text-slate-300">• <b>Ngày Chân/Bụng:</b> Barbell Squat, Leg Press, Calf Raises.</div>
+      <div class="text-[11px] text-slate-300">• <b>Ngày Đẩy (Push):</b> Bench Press, Shoulder Press, Dip.</div>
+      <div class="text-[11px] text-slate-300">• <b>Ngày Kéo (Pull):</b> Lat Pulldown, Barbell Row, Bicep Curls.</div>
+    </div>
+
+    <div class="glass p-3 rounded-2xl border border-amber-500/40 space-y-1">
+      <div class="font-extrabold text-xs text-amber-400 flex justify-between items-center">
+        <span>🔥 3. FITNESS / CONDITIONING (Cơ Động, Dẻo Dai)</span>
+        <span class="text-[9px] bg-amber-500/20 px-2 py-0.5 rounded-md">Linh hoạt</span>
+      </div>
+      <div class="text-[11px] text-slate-300">• <b>Resistance Band:</b> Kéo dây tập Vai, Tay, Chân đa góc độ.</div>
+      <div class="text-[11px] text-slate-300">• <b>Agility Training:</b> Chạy biến tốc, bật nhảy linh hoạt.</div>
+    </div>
+
+  </div>
+
+  <!-- TAB 2: CHẾ ĐỘ ĂN 16:8 TỐI ƯU -->
+  <div id="content2" class="space-y-2 hidden">
+    
+    <div class="glass p-3 rounded-2xl border border-sky-500/30 flex justify-between items-center">
+      <div>
+        <span class="text-[10px] bg-sky-400/20 text-sky-300 font-extrabold px-2 py-0.5 rounded-md">20:00 - 12:00</span>
+        <div class="font-bold text-xs text-white mt-1">⏳ KHUNG NHỊN (16 Tiếng)</div>
+        <div class="text-[11px] text-slate-400">Chỉ uống nước lọc, cà phê đen không đường, trà xanh.</div>
+      </div>
+      <span class="text-xl">☕</span>
+    </div>
+
+    <div class="glass p-3 rounded-2xl border border-amber-500/30 flex justify-between items-center">
+      <div>
+        <span class="text-[10px] bg-amber-400/20 text-amber-300 font-extrabold px-2 py-0.5 rounded-md">12:00</span>
+        <div class="font-bold text-xs text-white mt-1">🍗 BỮA 1 (Xả Nhịn)</div>
+        <div class="text-[11px] text-slate-300">Ức gà / Thịt bò / 2-3 Quả trứng luộc + Khoai lang + Rau.</div>
+      </div>
+      <span class="text-xl">🥩</span>
+    </div>
+
+    <div class="glass p-3 rounded-2xl border border-indigo-500/30 flex justify-between items-center">
+      <div>
+        <span class="text-[10px] bg-indigo-400/20 text-indigo-300 font-extrabold px-2 py-0.5 rounded-md">16:00</span>
+        <div class="font-bold text-xs text-white mt-1">🍌 BỮA PHỤ (Trước Tập)</div>
+        <div class="text-[11px] text-slate-300">1 quả chuối + 1 muỗng Whey Protein hoặc đai hạt.</div>
+      </div>
+      <span class="text-xl">🥛</span>
+    </div>
+
+    <div class="glass p-3 rounded-2xl border border-rose-500/30 flex justify-between items-center">
+      <div>
+        <span class="text-[10px] bg-rose-400/20 text-rose-300 font-extrabold px-2 py-0.5 rounded-md">19:30</span>
+        <div class="font-bold text-xs text-white mt-1">🥗 BỮA 2 (Chốt Khung Ăn)</div>
+        <div class="text-[11px] text-slate-300">Thịt cá hấp/kho + Rau xanh nhiều + Ít tinh bột. Khóa sổ lúc 20:00!</div>
+      </div>
+      <span class="text-xl">🥗</span>
+    </div>
+
+  </div>
+
+  <!-- TAB 3: BÀI FINISHER ĐỐT MỠ CHUẨN -->
+  <div id="content3" class="space-y-2 hidden">
+    
+    <div class="glass p-3 rounded-2xl border border-rose-500/40 space-y-1">
+      <div class="font-extrabold text-xs text-rose-400">⏱️ BÀI TẬP FINISHER 7 PHÚT (Cuối Bổi Tập)</div>
+      <div class="text-[11px] text-slate-300">Thực hiện liên tục 4 vòng (Mỗi bài 30s, nghỉ 15s):</div>
+      <div class="text-[11px] text-slate-300">• <b>1. Burpees:</b> Bật nhảy hít đất.</div>
+      <div class="text-[11px] text-slate-300">• <b>2. Mountain Climbers:</b> Leo núi tại chỗ.</div>
+      <div class="text-[11px] text-slate-300">• <b>3. Resistance Band Squat Jump:</b> Đeo dây kháng lực bật nhảy.</div>
+      <div class="text-[11px] text-slate-300">• <b>4. High Knees:</b> Chạy nâng cao đùi nhanh.</div>
+    </div>
+
+    <div onclick="goShopee(); event.stopPropagation();" class="cursor-pointer glass p-3 rounded-2xl border border-emerald-500/50 hover:border-emerald-500 transition shadow-md">
+      <div class="flex justify-between items-center">
+        <div class="font-extrabold text-xs text-emerald-400">🎗️ Dây Kháng Lực (Resistance Bands)</div>
+        <span class="text-[9px] bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded-full">Sắm Ngay →</span>
+      </div>
+      <div class="text-[11px] text-slate-300 mt-1">Dụng cụ không thể thiếu để tập Finisher đốt mỡ & siết cơ đùi, mông, vai tại nhà.</div>
+    </div>
+
+  </div>
+
+  <footer class="text-center text-[10px] text-slate-600 py-2">
+    © 2026 Body365 & 16:8 Fitness Plan.
+  </footer>
+
+  <!-- SCRIPT CHUYỂN TAB -->
+  <script>
+    function switchTab(num) {
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById(`content${i}`).classList.add('hidden');
+        document.getElementById(`tab${i}`).className = "py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800";
       }
-
-      if (!document.getElementById('result-container').classList.contains('hidden')) {
-        triggerGoal(lastGoal);
-      }
+      document.getElementById(`content${num}`).classList.remove('hidden');
+      document.getElementById(`tab${num}`).className = "py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md";
     }
-
-    function triggerGoal(goalType) {
-      autoTriggerAffiliate();
-      lastGoal = goalType;
-
-      const container = document.getElementById('result-container');
-      const title = document.getElementById('result-title');
-      const levelBadge = document.getElementById('level-badge');
-      const descTime = document.getElementById('desc-time');
-      const descFood = document.getElementById('desc-food');
-      const exerciseImg = document.getElementById('exercise-img');
-      const imgCaption = document.getElementById('img-caption');
-      
-      container.classList.remove('hidden');
-      container.scrollIntoView({ behavior: 'smooth' });
-
-      levelBadge.innerText = currentLevel === 'coban' ? '🟢 CƠ BẢN' : (currentLevel === 'nangcao' ? '🟡 NÂNG CAO' : '🔴 CHUYÊN SÂU');
-
-      if (goalType === 'Khoe') {
-        title.innerText = "⚡ Tập Để Khỏe & Bền Bỉ";
-        exerciseImg.src = "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=600&auto=format&fit=crop&q=80";
-        imgCaption.innerText = "🏋️ Động tác Mobility & Plank rèn dẻo dai toàn thân";
-
-        if (currentLevel === 'coban') {
-          descTime.innerText = "• Xoay khớp nhẹ nhàng 5p + Plank 1-2p.\n• Giúp giãn cơ vai gáy, thư giãn cột sống nhẹ nhàng.";
-        } else if (currentLevel === 'nangcao') {
-          descTime.innerText = "• Push-up (Hít đất) 3 hiệp x 12 cái + Jumping Jacks 2 phút.\n• Dùng Dây Kháng Lực kéo tay vai để tăng sức bền tim mạch.";
-        } else {
-          descTime.innerText = "• Burpees 4 hiệp x 15 cái + Mountain Climbers 3 phút + Plank 3 phút.\n• Kích thích toàn thân, rèn luyện ý chí và thể lực đỉnh cao.";
-        }
-        descFood.innerText = "Ăn đủ 3 bữa, bổ sung trứng luộc và trái cây tươi. Uống 2-2.5 lít nước ấm mỗi ngày bằng Bình Nước Thể Thao.";
-
-      } else if (goalType === 'GiamCan') {
-        title.innerText = "🔥 Giảm Cân / Tiêu Mỡ Bụng";
-        exerciseImg.src = "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=600&auto=format&fit=crop&q=80";
-        imgCaption.innerText = "🔥 Động tác Squats & Cardio tiêu hao calo mạnh";
-
-        if (currentLevel === 'coban') {
-          descTime.innerText = "• Squat nhẹ 3 x 15 cái + Đi bộ nhanh 15 phút.\n• Đốt mỡ an toàn không gây đuối sức.";
-        } else if (currentLevel === 'nangcao') {
-          descTime.innerText = "• Jump Squats + Lunge với Dây Kháng Lực đùi (3 hiệp x 15 cái).\n• Đốt calo mạnh mẽ vùng bụng và đùi.";
-        } else {
-          descTime.innerText = "• HIIT 20 phút liên tục: High Knees + Burpees + Squat Jump không nghỉ.\n• Đốt mỡ thừa tối đa suốt 24h sau tập.";
-        }
-        descFood.innerText = "Ăn 16:8 (nhịn ăn gián đoạn), ăn ức gà, khoai lang, trứng luộc. Cắt giảm hoàn toàn đồ ngọt.";
-
-      } else if (goalType === 'DayChang') {
-        title.innerText = "🦵 Khỏe Dây Chằng & Khớp Gối";
-        exerciseImg.src = "https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=600&auto=format&fit=crop&q=80";
-        imgCaption.innerText = "🦵 Tập gia cố đùi & phục hồi dây chằng khớp gối";
-
-        if (currentLevel === 'coban') {
-          descTime.innerText = "• Calf Raises (nhón bắp chân) 3 x 20 cái + Mở hông dẻo 5 phút.\n• Giảm áp lực lên khớp gối khi đứng lâu.";
-        } else if (currentLevel === 'nangcao') {
-          descTime.innerText = "• Bulgarian Split Squats (Squat 1 chân) + Tập mông đùi với Dây Kháng Lực.\n• Tăng độ chắc chắn cho dây chằng chéo.";
-        } else {
-          descTime.innerText = "• Single-leg Romanian Deadlift + Side Band Walks với Dây Kháng Lực căng.\n• Gia cố toàn bộ nhóm cơ quanh gối chống chấn thương.";
-        }
-        descFood.innerText = "Bổ sung canxi, đạm từ thịt cá, dùng Bình Nước Thể Thao uống đủ nước cho bao khớp.";
-
-      } else if (goalType === 'TangCan') {
-        title.innerText = "💪 Tăng Cân / Tăng Cơ Săn Chắc";
-        exerciseImg.src = "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&auto=format&fit=crop&q=80";
-        imgCaption.innerText = "💪 Động tác kháng lực kích thích phát triển cơ bắp";
-
-        if (currentLevel === 'coban') {
-          descTime.innerText = "• Hít đất bơm ngực 3 x 10 cái + Squat chậm 3 x 12 cái.\n• Kích thích cơ bắp quen với vận động.";
-        } else if (currentLevel === 'nangcao') {
-          descTime.innerText = "• Push-up chân kê cao + Squats kháng lực với Dây Kháng Lực (4 x 12 cái).\n• Tăng kích thước cơ ngực, đùi.";
-        } else {
-          descTime.innerText = "• Pistol Squats (Squat 1 chân) + Hít đất vai Pike Push-ups + Dây kháng lực max cơ.\n• Kích hoạt tối đa các sợi cơ bắp phát triển.";
-        }
-        descFood.innerText = "Tăng tinh bột tốt (cơm, khoai) + 3-4 quả trứng luộc/ngày. Chia nhỏ 4-5 bữa ăn.";
-      }
-    }
-
-    // Tự động load mặc định Tuần 1 khi mở trang
-    showFootballWeek(1);
   </script>
 
 </body>
