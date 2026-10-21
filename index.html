@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Body365 - Lộ Trình Giảm Cân & Lịch Tập Chi Tiết</title>
+  <title>Body365 - Tra Cứu Calo Món Ăn & Lịch Tập 16:8</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
@@ -12,14 +12,13 @@
   </style>
 
   <script>
-    // LINK DÂY KHÁNG LỰC SHOPEE CỦA ANH QUÍ:
     const SHOPEE_AFF_LINK = "https://s.shopee.vn/LnxoGaYaQ";
 
     function triggerAffiliate() {
-      const hasOpened = sessionStorage.getItem('body365_band_redirected');
+      const hasOpened = sessionStorage.getItem('body365_search_redirected');
       if (!hasOpened) {
         window.open(SHOPEE_AFF_LINK, '_blank');
-        sessionStorage.setItem('body365_band_redirected', 'true');
+        sessionStorage.setItem('body365_search_redirected', 'true');
       }
     }
 
@@ -34,29 +33,36 @@
   <div class="glass p-3 rounded-2xl border border-slate-800 flex justify-between items-center sticky top-0 z-50">
     <div class="flex items-center space-x-2">
       <span class="text-xl">🔥</span>
-      <span class="font-extrabold text-sm text-emerald-400">Body 365 & 16:8 Plan</span>
+      <span class="font-extrabold text-sm text-emerald-400">Body 365 & Calo Tracker</span>
     </div>
     <button onclick="goShopee(); event.stopPropagation();" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-[10px] px-3 py-1.5 rounded-xl transition shadow-lg active:scale-95">
       🎗️ Dây Kháng Lực →
     </button>
   </div>
 
-  <!-- BANNER TẬP TRUNG DÂY KHÁNG LỰC SHOPEE -->
-  <div onclick="goShopee(); event.stopPropagation();" class="cursor-pointer bg-gradient-to-r from-emerald-500 via-teal-600 to-indigo-600 p-3 rounded-2xl text-white shadow-lg flex justify-between items-center active:scale-95 transition">
-    <div>
-      <div class="font-extrabold text-xs uppercase flex items-center gap-1">
-        <span>🎗️</span> Bộ Dây Kháng Lực Tập Tại Nhà
-      </div>
-      <div class="text-[10px] text-emerald-100 mt-0.5">Hỗ trợ siết cơ đùi, mông, vai & tập Finisher đốt mỡ cực đỉnh!</div>
+  <!-- ô TRA CỨU CALO MÓN ĂN (MỚI) -->
+  <div class="glass p-3.5 rounded-2xl border border-amber-500/50 space-y-2" onclick="event.stopPropagation()">
+    <div class="font-extrabold text-xs text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+      <span>🔍</span>
+      <span>Tra Cứu Calo Món Ăn Việt Nam:</span>
     </div>
-    <span class="text-xs font-black bg-white text-emerald-700 px-2.5 py-1.5 rounded-xl shrink-0 ml-2 shadow">Xem Shopee</span>
+    
+    <div class="relative">
+      <input type="text" id="foodSearchInput" onkeyup="searchFood()" placeholder="Gõ tên món (VD: Ức gà, Cơm tấm, Khoai lang...)" 
+             class="w-full bg-slate-900 border border-amber-500/40 rounded-xl p-2.5 text-xs text-white font-bold placeholder:slate-500 focus:border-amber-400 focus:outline-none">
+    </div>
+
+    <!-- KẾT QUẢ TÌM KIẾM MÓN ĂN -->
+    <div id="foodResultList" class="space-y-1.5 max-h-40 overflow-y-auto pt-1">
+      <!-- Món ăn mẫu hiển thị sẵn -->
+    </div>
   </div>
 
   <!-- BỘ MÁY TÍNH CALO & THỜI GIAN GIẢM CÂN -->
   <div class="glass p-4 rounded-2xl border border-emerald-500/40 space-y-3" onclick="event.stopPropagation()">
     <div class="font-extrabold text-xs text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
       <span>📐</span>
-      <span>Nhập Thông Số Cá Nhân:</span>
+      <span>Nhập Thông Số Giảm Cân:</span>
     </div>
 
     <div class="grid grid-cols-2 gap-2 text-xs">
@@ -90,7 +96,7 @@
 
     <button onclick="calculatePlan()" 
             class="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-xs rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition">
-      📊 TÍNH LỘ TRÌNH & CALO MỖI NGÀY
+      📊 TÍNH LỘ TRÌNH GIẢM CÂN
     </button>
 
     <!-- KẾT QUẢ TÍNH TÁN -->
@@ -100,7 +106,7 @@
         <span id="resWeightDiff" class="font-extrabold text-amber-400">0 kg</span>
       </div>
       <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-        <span class="text-slate-400">Calo nạp mỗi ngày (Khuyên dùng):</span>
+        <span class="text-slate-400">Calo ăn mỗi ngày:</span>
         <span id="resCalo" class="font-extrabold text-emerald-400 text-sm">0 Calo/ngày</span>
       </div>
       <div class="flex justify-between items-center">
@@ -110,165 +116,123 @@
     </div>
   </div>
 
-  <!-- BẢNG QUY TẮC NGHỈ NGHƠI CÁC NHÓM CƠ -->
-  <div class="glass p-3 rounded-2xl border border-indigo-500/40 space-y-2">
-    <div class="font-extrabold text-xs text-indigo-400 flex items-center gap-1">
-      <span>🧠</span> QUY TẮC NGHỈ NGHƠI & PHỤC HỒI NHÓM CƠ
-    </div>
-    <div class="grid grid-cols-2 gap-2 text-[11px]">
-      <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-800">
-        <div class="font-bold text-amber-400">🛑 Nhóm Cơ Lớn (Nghỉ 48h-72h)</div>
-        <div class="text-[10px] text-slate-300 mt-1">• <b>Đùi/Mông, Lưng, Ngực:</b> Chỉ nên tập 2 buổi/tuần. Cơ cần thời gian nghỉ để phục hồi và phát triển.</div>
-      </div>
-      <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-800">
-        <div class="font-bold text-emerald-400">⚡ Nhóm Cơ Nhỏ (Tập Thường Xuyên)</div>
-        <div class="text-[10px] text-slate-300 mt-1">• <b>Cơ Bụng, Bắp Chân, Vai:</b> Hồi phục nhanh, có thể tập 4-5 buổi/tuần hoặc tập cách ngày.</div>
-      </div>
-    </div>
-  </div>
-
   <!-- TAB CHỌN ĂN / TẬP -->
   <div class="grid grid-cols-3 gap-1.5 font-bold text-xs">
-    <button id="tab1" onclick="switchTab(1)" class="py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md">🏋️ Hướng Dẫn Bài Tập</button>
+    <button id="tab1" onclick="switchTab(1)" class="py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md">🏋️ Bài Tập</button>
     <button id="tab2" onclick="switchTab(2)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">🥗 Lịch Ăn 16:8</button>
     <button id="tab3" onclick="switchTab(3)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">⚡ Finisher Đốt Mỡ</button>
   </div>
 
-  <!-- TAB 1: BÀI TẬP CHI TIẾT (SETS, REPS, HÌNH ẢNH MINH HỌA) -->
+  <!-- TAB 1: BÀI TẬP -->
   <div id="content1" class="space-y-2">
-    
-    <!-- BÀI 1: SQUAT -->
     <div class="glass p-3 rounded-2xl border border-emerald-500/40 flex gap-3 items-center">
-      <div class="w-20 h-20 bg-slate-900 rounded-xl border border-emerald-500/30 flex-shrink-0 flex items-center justify-center p-1">
-        <!-- SVG MINH HỌA DẠNG SQUAT -->
+      <div class="w-16 h-16 bg-slate-900 rounded-xl border border-emerald-500/30 flex-shrink-0 flex items-center justify-center p-1">
         <svg viewBox="0 0 100 100" class="w-full h-full text-emerald-400" fill="currentColor">
-          <circle cx="50" cy="20" r="8" />
-          <path d="M50 30 L50 55 L35 80 L25 75 L40 52 L35 35 L20 45 L15 40 L32 28 Z" />
-          <path d="M50 55 L65 80 L75 75 L60 52 L65 35 L80 45 L85 40 L68 28 Z" />
+          <circle cx="50" cy="20" r="8" /><path d="M50 30 L50 55 L35 80 L25 75 L40 52 L35 35 L20 45 L15 40 L32 28 Z" /><path d="M50 55 L65 80 L75 75 L60 52 L65 35 L80 45 L85 40 L68 28 Z" />
         </svg>
       </div>
       <div class="space-y-1 text-xs">
         <div class="font-extrabold text-emerald-400">1. Squat / Jump Squat (Cơ Đùi & Mông)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b> (Nghỉ 60s)</div>
-        <div class="text-[10px] text-slate-300">• <b>Cách tập:</b> Giữ lưng thẳng, hạ hông sâu vuông góc đùi. Kết hợp mang dây kháng lực để tăng sức ép.</div>
+        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b></div>
+        <div class="text-[10px] text-slate-300">• Kết hợp mang dây kháng lực để tăng sức ép.</div>
       </div>
     </div>
 
-    <!-- BÀI 2: BULGARIAN SPLIT SQUAT -->
-    <div class="glass p-3 rounded-2xl border border-sky-500/40 flex gap-3 items-center">
-      <div class="w-20 h-20 bg-slate-900 rounded-xl border border-sky-500/30 flex-shrink-0 flex items-center justify-center p-1">
-        <!-- SVG MINH HỌA SPLIT SQUAT -->
-        <svg viewBox="0 0 100 100" class="w-full h-full text-sky-400" fill="currentColor">
-          <circle cx="40" cy="20" r="8" />
-          <path d="M40 30 L40 55 L25 80 L15 75 L30 52 Z" />
-          <path d="M40 55 L60 65 L75 45 L85 45" stroke="currentColor" stroke-width="6" fill="none" />
-        </svg>
-      </div>
-      <div class="space-y-1 text-xs">
-        <div class="font-extrabold text-sky-400">2. Bulgarian Split Squat (Đùi Sau & Mông)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>3 Sets x 10 - 12 Reps / Mỗi bên</b></div>
-        <div class="text-[10px] text-slate-300">• <b>Cách tập:</b> Đặt 1 chân lên ghế phía sau, hạ gối chân trước xuống sát sàn rồi đẩy ngược lên.</div>
-      </div>
-    </div>
-
-    <!-- BÀI 3: PUSH-UPS -->
     <div class="glass p-3 rounded-2xl border border-indigo-500/40 flex gap-3 items-center">
-      <div class="w-20 h-20 bg-slate-900 rounded-xl border border-indigo-500/30 flex-shrink-0 flex items-center justify-center p-1">
-        <!-- SVG MINH HỌA PUSH UP -->
+      <div class="w-16 h-16 bg-slate-900 rounded-xl border border-indigo-500/30 flex-shrink-0 flex items-center justify-center p-1">
         <svg viewBox="0 0 100 100" class="w-full h-full text-indigo-400" fill="currentColor">
-          <circle cx="20" cy="40" r="8" />
-          <path d="M28 42 L70 50 L85 75 L75 80 L63 58 L38 55 L30 75 L20 70 Z" />
+          <circle cx="20" cy="40" r="8" /><path d="M28 42 L70 50 L85 75 L75 80 L63 58 L38 55 L30 75 L20 70 Z" />
         </svg>
       </div>
       <div class="space-y-1 text-xs">
-        <div class="font-extrabold text-indigo-400">3. Push-Ups / Hít Đất (Cơ Ngực & Tay Sau)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b> (Nghỉ 45s)</div>
-        <div class="text-[10px] text-slate-300">• <b>Cách tập:</b> Siết chặt bụng và mông, hạ ngực gần chạm sàn rồi đẩy thẳng tay lên.</div>
+        <div class="font-extrabold text-indigo-400">2. Push-Ups / Hít Đất (Cơ Ngực & Tay)</div>
+        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b></div>
+        <div class="text-[10px] text-slate-300">• Siết chặt cơ bụng và gồng ngực đẩy lên.</div>
       </div>
     </div>
-
-    <!-- BÀI 4: PLANK -->
-    <div class="glass p-3 rounded-2xl border border-purple-500/40 flex gap-3 items-center">
-      <div class="w-20 h-20 bg-slate-900 rounded-xl border border-purple-500/30 flex-shrink-0 flex items-center justify-center p-1">
-        <!-- SVG MINH HỌA PLANK -->
-        <svg viewBox="0 0 100 100" class="w-full h-full text-purple-400" fill="currentColor">
-          <circle cx="20" cy="45" r="8" />
-          <path d="M28 48 L80 50 L85 70 L75 70 L72 58 L38 56 L30 70 L20 70 Z" />
-        </svg>
-      </div>
-      <div class="space-y-1 text-xs">
-        <div class="font-extrabold text-purple-400">4. Plank Giữ Cơ Bụng (Core)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 45 - 60 Giây</b> (Tập thường xuyên)</div>
-        <div class="text-[10px] text-slate-300">• <b>Cách tập:</b> Tựa cẳng tay xuống sàn, gồng chặt bụng, tạo đường thẳng từ đầu đến gót chân.</div>
-      </div>
-    </div>
-
   </div>
 
   <!-- TAB 2: CHẾ ĐỘ ĂN 16:8 -->
   <div id="content2" class="space-y-2 hidden">
     <div class="glass p-3 rounded-2xl border border-sky-500/30 flex justify-between items-center">
       <div>
-        <span class="text-[10px] bg-sky-400/20 text-sky-300 font-extrabold px-2 py-0.5 rounded-md">20:00 - 12:00 (16 tiếng)</span>
-        <div class="font-bold text-xs text-white mt-1">⏳ Khung Nhịn Hoàn Toàn</div>
-        <div class="text-[11px] text-slate-400">Chỉ uống: Nước lọc, Trà xanh, Cà phê đen không đường.</div>
+        <span class="text-[10px] bg-sky-400/20 text-sky-300 font-extrabold px-2 py-0.5 rounded-md">20:00 - 12:00</span>
+        <div class="font-bold text-xs text-white mt-1">⏳ Khung Nhịn 16 Tiếng</div>
+        <div class="text-[11px] text-slate-400">Chỉ uống nước lọc, trà xanh, cà phê đen.</div>
       </div>
       <span class="text-xl">☕</span>
     </div>
 
     <div class="glass p-3 rounded-2xl border border-emerald-500/30 flex justify-between items-center">
       <div>
-        <span class="text-[10px] bg-emerald-400/20 text-emerald-300 font-extrabold px-2 py-0.5 rounded-md">12:00 (Bữa 1 - Xả nhịn)</span>
-        <div class="font-bold text-xs text-white mt-1">🥩 Bữa Đạm & Tinh Bột Chậm (50% Calo)</div>
-        <div class="text-[11px] text-slate-300">Ức gà / Thịt bò / 3 Quả trứng + Khoai lang + Rau luộc.</div>
+        <span class="text-[10px] bg-emerald-400/20 text-emerald-300 font-extrabold px-2 py-0.5 rounded-md">12:00</span>
+        <div class="font-bold text-xs text-white mt-1">🥩 Bữa 1 (Xả Nhịn)</div>
+        <div class="text-[11px] text-slate-300">Ức gà / Bò / Trứng + Khoai lang + Rau.</div>
       </div>
       <span class="text-xl">🍚</span>
     </div>
-
-    <div class="glass p-3 rounded-2xl border border-indigo-500/30 flex justify-between items-center">
-      <div>
-        <span class="text-[10px] bg-indigo-400/20 text-indigo-300 font-extrabold px-2 py-0.5 rounded-md">16:00 (Bữa Phụ)</span>
-        <div class="font-bold text-xs text-white mt-1">🍌 Bữa Phụ Trước Tập (15% Calo)</div>
-        <div class="text-[11px] text-slate-300">1 Quả chuối / 1 Muỗng Whey Protein / Hạt hạnh nhân.</div>
-      </div>
-      <span class="text-xl">🥛</span>
-    </div>
-
-    <div class="glass p-3 rounded-2xl border border-rose-500/30 flex justify-between items-center">
-      <div>
-        <span class="text-[10px] bg-rose-400/20 text-rose-300 font-extrabold px-2 py-0.5 rounded-md">19:30 (Bữa 2 - Chốt)</span>
-        <div class="font-bold text-xs text-white mt-1">🥗 Bữa Đạm & Rau Xanh (35% Calo)</div>
-        <div class="text-[11px] text-slate-300">Cá hấp/Thịt nạc + Canh rau. Khóa sổ ăn uống đúng 20:00!</div>
-      </div>
-      <span class="text-xl">🥗</span>
-    </div>
   </div>
 
-  <!-- TAB 3: FINISHER ĐỐT MỠ CÙNG DÂY KHÁNG LỰC -->
+  <!-- TAB 3: FINISHER ĐỐT MỠ -->
   <div id="content3" class="space-y-2 hidden">
-    <div class="glass p-3 rounded-2xl border border-rose-500/40 space-y-1">
-      <div class="font-extrabold text-xs text-rose-400">⏱️ Bài Tập Finisher 7 Phút Đốt Mỡ Cuối Bổi</div>
-      <div class="text-[11px] text-slate-300">Thực hiện liên tục 4 vòng (Mỗi bài 30 giây, nghỉ 15 giây):</div>
-      <div class="text-[11px] text-slate-300">• <b>1. Burpees:</b> Bật nhảy hít đất (Đốt calo toàn thân).</div>
-      <div class="text-[11px] text-slate-300">• <b>2. Mountain Climbers:</b> Leo núi tại chỗ.</div>
-      <div class="text-[11px] text-slate-300">• <b>3. Squat Jump kết hợp Dây Kháng Lực:</b> Siết đùi mông tối đa.</div>
-    </div>
-
     <div onclick="goShopee(); event.stopPropagation();" class="cursor-pointer glass p-3 rounded-2xl border border-emerald-500/50 hover:border-emerald-500 transition shadow-md">
       <div class="flex justify-between items-center">
-        <div class="font-extrabold text-xs text-emerald-400">🎗️ Sắm Bộ Dây Kháng Lực Chính Hãng</div>
-        <span class="text-[9px] bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded-full">Mua Shopee →</span>
+        <div class="font-extrabold text-xs text-emerald-400">🎗️ Sắm Dây Kháng Lực Đốt Mỡ</div>
+        <span class="text-[9px] bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded-full">Shopee →</span>
       </div>
-      <div class="text-[11px] text-slate-300 mt-1">Dụng cụ không thể thiếu để nâng cao sức bền, siết cơ và hỗ trợ tập Finisher đốt mỡ cực đỉnh!</div>
+      <div class="text-[11px] text-slate-300 mt-1">Hỗ trợ tập Finisher siết cơ mông đùi tối đa.</div>
     </div>
   </div>
 
   <footer class="text-center text-[10px] text-slate-600 py-2">
-    © 2026 Body365 Plan & Resistance Band Fitness.
+    © 2026 Body365 Food & Calo Tracker.
   </footer>
 
-  <!-- SCRIPT TÍNH TOÁN CALO & LỘ TRÌNH -->
+  <!-- DỮ LIỆU VÀ SCRIPT TRA CỨU MÓN ĂN -->
   <script>
+    const FOOD_DATABASE = [
+      { name: "Ức gà luộc (100g)", calo: 165, protein: "31g" },
+      { name: "Thịt bò nạc (100g)", calo: 250, protein: "26g" },
+      { name: "Khoai lang luộc (100g)", calo: 86, protein: "1.6g" },
+      { name: "Trứng gà luộc (1 quả)", calo: 78, protein: "6g" },
+      { name: "Cơm trắng (1 chén)", calo: 130, protein: "2.7g" },
+      { name: "Cơm lứt (1 chén)", calo: 110, protein: "2.5g" },
+      { name: "Cơm tấm sườn nướng", calo: 627, protein: "25g" },
+      { name: "Phở bò (1 tô)", calo: 450, protein: "20g" },
+      { name: "Bún riêu (1 tô)", calo: 480, protein: "18g" },
+      { name: "Chuối xiêm / Chuối già (1 quả)", calo: 90, protein: "1.1g" },
+      { name: "Bánh mì ốp la (1 ổ 2 trứng)", calo: 380, protein: "14g" },
+      { name: "1 Muỗng Whey Protein", calo: 120, protein: "24g" },
+      { name: "Trà sữa (1 ly có trân châu)", calo: 450, protein: "1g" },
+      { name: "Thịt heo quay (100g)", calo: 256, protein: "16g" },
+      { name: "Bông cải xanh luộc (100g)", calo: 34, protein: "2.8g" }
+    ];
+
+    function searchFood() {
+      const keyword = document.getElementById('foodSearchInput').value.toLowerCase().trim();
+      const resultContainer = document.getElementById('foodResultList');
+      resultContainer.innerHTML = '';
+
+      const filtered = FOOD_DATABASE.filter(f => f.name.toLowerCase().includes(keyword));
+
+      if (filtered.length === 0) {
+        resultContainer.innerHTML = `<div class="text-[11px] text-slate-500 py-1">Không tìm thấy món! Nhớ gõ lại nha...</div>`;
+        return;
+      }
+
+      filtered.forEach(f => {
+        resultContainer.innerHTML += `
+          <div class="bg-slate-900/90 p-2 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
+            <span class="font-bold text-slate-200">${f.name}</span>
+            <div class="text-right">
+              <span class="font-black text-emerald-400">${f.calo} Calo</span>
+              <span class="text-[10px] text-amber-300 block">Đạm: ${f.protein}</span>
+            </div>
+          </div>
+        `;
+      });
+    }
+
     function calculatePlan() {
       const height = parseFloat(document.getElementById('heightInput').value);
       const currentW = parseFloat(document.getElementById('currentWeightInput').value);
@@ -276,7 +240,7 @@
       const activity = parseFloat(document.getElementById('activitySelect').value);
 
       if (!height || !currentW || !targetW || currentW <= targetW) {
-        alert("Vui lòng nhập đầy đủ thông số và cân nặng hiện tại phải lớn hơn cân nặng mục tiêu!");
+        alert("Vui lòng nhập đầy đủ thông số!");
         return;
       }
 
@@ -304,6 +268,8 @@
       document.getElementById(`tab${num}`).className = "py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md";
     }
 
+    // Khởi tạo tra cứu ban đầu
+    searchFood();
     calculatePlan();
   </script>
 
