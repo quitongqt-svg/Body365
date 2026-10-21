@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Body365 - All-In-One Fitness & 16:8</title>
+  <title>Body365 - Tra Cứu Calo Thông Minh & 16:8</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
@@ -12,14 +12,13 @@
   </style>
 
   <script>
-    // LINK DÂY KHÁNG LỰC CỦA ANH QUÍ
     const SHOPEE_AFF_LINK = "https://s.shopee.vn/LnxoGaYaQ";
 
     function triggerAffiliate() {
-      const hasOpened = sessionStorage.getItem('body365_full_redirected');
+      const hasOpened = sessionStorage.getItem('body365_v2_redirected');
       if (!hasOpened) {
         window.open(SHOPEE_AFF_LINK, '_blank');
-        sessionStorage.setItem('body365_full_redirected', 'true');
+        sessionStorage.setItem('body365_v2_redirected', 'true');
       }
     }
 
@@ -41,7 +40,7 @@
     </button>
   </div>
 
-  <!-- BANNER DÂY KHÁNG LỰC SHOPEE -->
+  <!-- BANNER SHOPEE -->
   <div onclick="goShopee(); event.stopPropagation();" class="cursor-pointer bg-gradient-to-r from-emerald-500 via-teal-600 to-indigo-600 p-3 rounded-2xl text-white shadow-lg flex justify-between items-center active:scale-95 transition">
     <div>
       <div class="font-extrabold text-xs uppercase flex items-center gap-1">
@@ -52,19 +51,28 @@
     <span class="text-xs font-black bg-white text-emerald-700 px-2.5 py-1.5 rounded-xl shrink-0 ml-2 shadow">Xem Shopee</span>
   </div>
 
-  <!-- 1. Ô TRA CỨU CALO MÓN ĂN -->
-  <div class="glass p-3.5 rounded-2xl border border-amber-500/50 space-y-2" onclick="event.stopPropagation()">
-    <div class="font-extrabold text-xs text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
-      <span>🔍</span>
-      <span>Tra Cứu Calo Món Ăn Nhanh:</span>
+  <!-- 1. Ô TRA CỨU CALO MÓN ĂN THÔNG MINH (ĐÃ TỐI ƯU) -->
+  <div class="glass p-3.5 rounded-2xl border border-amber-500/50 space-y-2.5" onclick="event.stopPropagation()">
+    <div class="font-extrabold text-xs text-amber-400 uppercase tracking-wider flex items-center justify-between">
+      <span class="flex items-center gap-1.5">🔍 Tra Cứu Calo Món Ăn:</span>
+      <span class="text-[9px] text-slate-400 font-normal">Gõ không dấu vẫn tìm được</span>
     </div>
     
     <div class="relative">
-      <input type="text" id="foodSearchInput" onkeyup="searchFood()" placeholder="Gõ tên món (VD: Ức gà, Cơm tấm, Khoai lang...)" 
-             class="w-full bg-slate-900 border border-amber-500/40 rounded-xl p-2.5 text-xs text-white font-bold placeholder:slate-500 focus:border-amber-400 focus:outline-none">
+      <input type="text" id="foodSearchInput" onkeyup="searchFood()" placeholder="Tìm món (VD: com chien, uc ga, com tam...)" 
+             class="w-full bg-slate-900 border border-amber-500/40 rounded-xl p-2.5 text-xs text-white font-bold placeholder:text-slate-500 focus:border-amber-400 focus:outline-none">
     </div>
 
-    <div id="foodResultList" class="space-y-1.5 max-h-36 overflow-y-auto pt-1"></div>
+    <!-- NÚT GỢI Ý NHANH -->
+    <div class="flex gap-1.5 overflow-x-auto pb-1 text-[10px]">
+      <button onclick="quickSearch('Cơm chiên')" class="px-2.5 py-1 bg-amber-500/20 text-amber-300 rounded-lg border border-amber-500/30 whitespace-nowrap font-bold">🍚 Cơm chiên</button>
+      <button onclick="quickSearch('Ức gà')" class="px-2.5 py-1 bg-emerald-500/20 text-emerald-300 rounded-lg border border-emerald-500/30 whitespace-nowrap font-bold">🍗 Ức gà</button>
+      <button onclick="quickSearch('Cơm tấm')" class="px-2.5 py-1 bg-rose-500/20 text-rose-300 rounded-lg border border-rose-500/30 whitespace-nowrap font-bold">🥩 Cơm tấm</button>
+      <button onclick="quickSearch('Phở')" class="px-2.5 py-1 bg-sky-500/20 text-sky-300 rounded-lg border border-sky-500/30 whitespace-nowrap font-bold">🍜 Phở bò</button>
+    </div>
+
+    <!-- KẾT QUẢ TÌM KIẾM -->
+    <div id="foodResultList" class="space-y-1.5 max-h-48 overflow-y-auto pt-1"></div>
   </div>
 
   <!-- 2. BỘ MÁY TÍNH CALO & LỘ TRÌNH GIẢM CÂN -->
@@ -105,7 +113,7 @@
 
     <button onclick="calculatePlan()" 
             class="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-xs rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition">
-      📊 TÍNH LỘ TRÌNH & CALO MỖI NGÀY
+      📊 TÍNH LỘ TRÌNH GIẢM CÂN
     </button>
 
     <div id="resultBox" class="hidden bg-slate-900/90 rounded-xl p-3 border border-emerald-500/50 space-y-2 text-xs">
@@ -132,26 +140,24 @@
     <div class="grid grid-cols-2 gap-2 text-[11px]">
       <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-800">
         <div class="font-bold text-amber-400">🛑 Cơ Lớn (Nghỉ 48h-72h)</div>
-        <div class="text-[10px] text-slate-300 mt-1">• <b>Đùi/Mông, Lưng, Ngực:</b> Tập 2 buổi/tuần để cơ phục hồi & phát triển.</div>
+        <div class="text-[10px] text-slate-300 mt-1">• <b>Đùi/Mông, Lưng, Ngực:</b> Tập 2 buổi/tuần.</div>
       </div>
       <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-800">
         <div class="font-bold text-emerald-400">⚡ Cơ Nhỏ (Tập Thường Xuyên)</div>
-        <div class="text-[10px] text-slate-300 mt-1">• <b>Bụng, Bắp Chân, Vai:</b> Hồi phục nhanh, tập 4-5 buổi/tuần hoặc cách ngày.</div>
+        <div class="text-[10px] text-slate-300 mt-1">• <b>Bụng, Bắp Chân, Vai:</b> Tập 4-5 buổi/tuần.</div>
       </div>
     </div>
   </div>
 
-  <!-- BẢNG CHỌN TAB NỘI DUNG -->
+  <!-- TAB CHỌN ĂN / TẬP -->
   <div class="grid grid-cols-3 gap-1.5 font-bold text-xs">
-    <button id="tab1" onclick="switchTab(1)" class="py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md">🏋️ Tất Cả Bài Tập</button>
+    <button id="tab1" onclick="switchTab(1)" class="py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md">🏋️ Bài Tập</button>
     <button id="tab2" onclick="switchTab(2)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">🥗 Lịch Ăn 16:8</button>
     <button id="tab3" onclick="switchTab(3)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">⚡ Finisher Đốt Mỡ</button>
   </div>
 
-  <!-- TAB 1: TẤT CẢ CÁC BÀI TẬP (FULL BODYWEIGHT & GYM) -->
+  <!-- TAB 1: CÁC BÀI TẬP -->
   <div id="content1" class="space-y-2">
-    
-    <!-- 1. SQUAT -->
     <div class="glass p-3 rounded-2xl border border-emerald-500/40 flex gap-3 items-center">
       <div class="w-16 h-16 bg-slate-900 rounded-xl border border-emerald-500/30 flex-shrink-0 flex items-center justify-center p-1">
         <svg viewBox="0 0 100 100" class="w-full h-full text-emerald-400" fill="currentColor">
@@ -160,12 +166,11 @@
       </div>
       <div class="space-y-1 text-xs">
         <div class="font-extrabold text-emerald-400">1. Squat / Jump Squat (Đùi & Mông)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b> (Nghỉ 60s)</div>
-        <div class="text-[10px] text-slate-300">• Mang dây kháng lực quanh đùi để tăng hiệu quả.</div>
+        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b></div>
+        <div class="text-[10px] text-slate-300">• Kết hợp mang dây kháng lực để tăng sức ép.</div>
       </div>
     </div>
 
-    <!-- 2. BULGARIAN SPLIT SQUAT -->
     <div class="glass p-3 rounded-2xl border border-sky-500/40 flex gap-3 items-center">
       <div class="w-16 h-16 bg-slate-900 rounded-xl border border-sky-500/30 flex-shrink-0 flex items-center justify-center p-1">
         <svg viewBox="0 0 100 100" class="w-full h-full text-sky-400" fill="currentColor">
@@ -174,26 +179,11 @@
       </div>
       <div class="space-y-1 text-xs">
         <div class="font-extrabold text-sky-400">2. Bulgarian Split Squat (Đùi Sau & Mông)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>3 Sets x 10 - 12 Reps / Mỗi bên</b></div>
+        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>3 Sets x 10 - 12 Reps / Bên</b></div>
         <div class="text-[10px] text-slate-300">• Đặt 1 chân lên ghế phía sau, hạ gối vuông góc.</div>
       </div>
     </div>
 
-    <!-- 3. LUNGES -->
-    <div class="glass p-3 rounded-2xl border border-teal-500/40 flex gap-3 items-center">
-      <div class="w-16 h-16 bg-slate-900 rounded-xl border border-teal-500/30 flex-shrink-0 flex items-center justify-center p-1">
-        <svg viewBox="0 0 100 100" class="w-full h-full text-teal-400" fill="currentColor">
-          <circle cx="45" cy="20" r="8" /><path d="M45 30 L45 55 L25 80 L35 80 L50 58 Z" /><path d="M45 55 L70 58 L70 80 L60 80 Z" />
-        </svg>
-      </div>
-      <div class="space-y-1 text-xs">
-        <div class="font-extrabold text-teal-400">3. Walking Lunges (Bước Chân Cùi)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 16 Bước</b> (Nghỉ 45s)</div>
-        <div class="text-[10px] text-slate-300">• Sải bước rộng, gối không vượt quá mũi chân.</div>
-      </div>
-    </div>
-
-    <!-- 4. PUSH-UPS -->
     <div class="glass p-3 rounded-2xl border border-indigo-500/40 flex gap-3 items-center">
       <div class="w-16 h-16 bg-slate-900 rounded-xl border border-indigo-500/30 flex-shrink-0 flex items-center justify-center p-1">
         <svg viewBox="0 0 100 100" class="w-full h-full text-indigo-400" fill="currentColor">
@@ -201,13 +191,12 @@
         </svg>
       </div>
       <div class="space-y-1 text-xs">
-        <div class="font-extrabold text-indigo-400">4. Push-Ups / Hít Đất (Ngực & Tay Sau)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b> (Nghỉ 45s)</div>
-        <div class="text-[10px] text-slate-300">• Siết chặt bụng mông, đẩy ngực sát đất.</div>
+        <div class="font-extrabold text-indigo-400">3. Push-Ups / Hít Đất (Ngực & Tay)</div>
+        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 12 - 15 Reps</b></div>
+        <div class="text-[10px] text-slate-300">• Siết cơ bụng, đẩy ngực sát sàn.</div>
       </div>
     </div>
 
-    <!-- 5. PLANK -->
     <div class="glass p-3 rounded-2xl border border-purple-500/40 flex gap-3 items-center">
       <div class="w-16 h-16 bg-slate-900 rounded-xl border border-purple-500/30 flex-shrink-0 flex items-center justify-center p-1">
         <svg viewBox="0 0 100 100" class="w-full h-full text-purple-400" fill="currentColor">
@@ -215,26 +204,11 @@
         </svg>
       </div>
       <div class="space-y-1 text-xs">
-        <div class="font-extrabold text-purple-400">5. Plank Giữ Cơ Bụng (Core)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 45 - 60 Giây</b> (Nghỉ 30s)</div>
-        <div class="text-[10px] text-slate-300">• Gồng gắt cơ bụng, không võng lưng.</div>
+        <div class="font-extrabold text-purple-400">4. Plank Giữ Cơ Bụng (Core)</div>
+        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 45 - 60 Giây</b></div>
+        <div class="text-[10px] text-slate-300">• Gồng cơ bụng, thẳng từ đầu đến gót chân.</div>
       </div>
     </div>
-
-    <!-- 6. CALF RAISES -->
-    <div class="glass p-3 rounded-2xl border border-rose-500/40 flex gap-3 items-center">
-      <div class="w-16 h-16 bg-slate-900 rounded-xl border border-rose-500/30 flex-shrink-0 flex items-center justify-center p-1">
-        <svg viewBox="0 0 100 100" class="w-full h-full text-rose-400" fill="currentColor">
-          <circle cx="50" cy="20" r="8" /><path d="M50 30 L50 60 L45 85 L55 85 Z" />
-        </svg>
-      </div>
-      <div class="space-y-1 text-xs">
-        <div class="font-extrabold text-rose-400">6. Standing Calf Raises (Bắp Chân)</div>
-        <div class="text-[11px] text-amber-300 font-bold">• Mức tập: <b>4 Sets x 20 Reps</b> (Tập thường xuyên)</div>
-        <div class="text-[10px] text-slate-300">• Kiễng cao gót chân hết cỡ, siết chặt bắp chân.</div>
-      </div>
-    </div>
-
   </div>
 
   <!-- TAB 2: CHẾ ĐỘ ĂN 16:8 -->
@@ -243,7 +217,7 @@
       <div>
         <span class="text-[10px] bg-sky-400/20 text-sky-300 font-extrabold px-2 py-0.5 rounded-md">20:00 - 12:00</span>
         <div class="font-bold text-xs text-white mt-1">⏳ Khung Nhịn 16 Tiếng</div>
-        <div class="text-[11px] text-slate-400">Chỉ uống: Nước lọc, Trà xanh, Cà phê đen không đường.</div>
+        <div class="text-[11px] text-slate-400">Chỉ uống nước lọc, trà xanh, cà phê đen.</div>
       </div>
       <span class="text-xl">☕</span>
     </div>
@@ -268,7 +242,7 @@
 
     <div class="glass p-3 rounded-2xl border border-rose-500/30 flex justify-between items-center">
       <div>
-        <span class="text-[10px] bg-rose-400/20 text-rose-300 font-extrabold px-2 py-0.5 rounded-md">19:30 (Bữa 2 - Chốt)</span>
+        <span class="text-[10px] bg-rose-400/20 text-rose-300 font-extrabold px-2 py-0.5 rounded-md">19:30 (Bữa 2)</span>
         <div class="font-bold text-xs text-white mt-1">🥗 Bữa Đạm & Rau Xanh (35% Calo)</div>
         <div class="text-[11px] text-slate-300">Cá hấp/Thịt nạc + Canh rau. Khóa sổ đúng 20:00!</div>
       </div>
@@ -276,71 +250,111 @@
     </div>
   </div>
 
-  <!-- TAB 3: FINISHER ĐỐT MỠ KHÓA BỔI TẬP -->
+  <!-- TAB 3: FINISHER ĐỐT MỠ -->
   <div id="content3" class="space-y-2 hidden">
     <div class="glass p-3 rounded-2xl border border-rose-500/40 space-y-1">
-      <div class="font-extrabold text-xs text-rose-400">⏱️ Bài Tập Finisher 7 Phút Đốt Mỡ Cuối Bổi</div>
-      <div class="text-[11px] text-slate-300">Thực hiện liên tục 4 vòng (Mỗi bài 30 giây, nghỉ 15 giây):</div>
-      <div class="text-[11px] text-slate-300">• <b>1. Burpees:</b> Bật nhảy hít đất toàn thân.</div>
-      <div class="text-[11px] text-slate-300">• <b>2. Mountain Climbers:</b> Leo núi tại chỗ.</div>
-      <div class="text-[11px] text-slate-300">• <b>3. Squat Jump với Dây Kháng Lực:</b> Đốt calo mông đùi.</div>
-      <div class="text-[11px] text-slate-300">• <b>4. High Knees:</b> Chạy nâng cao đùi nhanh.</div>
+      <div class="font-extrabold text-xs text-rose-400">⏱️ Finisher 7 Phút Đốt Mỡ Cuối Bổi</div>
+      <div class="text-[11px] text-slate-300">• Burpees, Mountain Climbers, Squat Jump dây kháng lực.</div>
     </div>
 
     <div onclick="goShopee(); event.stopPropagation();" class="cursor-pointer glass p-3 rounded-2xl border border-emerald-500/50 hover:border-emerald-500 transition shadow-md">
       <div class="flex justify-between items-center">
-        <div class="font-extrabold text-xs text-emerald-400">🎗️ Mua Dây Kháng Lực Đốt Mỡ</div>
+        <div class="font-extrabold text-xs text-emerald-400">🎗️ Sắm Dây Kháng Lực Đốt Mỡ</div>
         <span class="text-[9px] bg-emerald-500 text-slate-950 font-black px-2 py-0.5 rounded-full">Shopee →</span>
       </div>
-      <div class="text-[11px] text-slate-300 mt-1">Dụng cụ cực kỳ thiết yếu cho các bài Finisher siết mỡ đùi mông siêu nhanh.</div>
+      <div class="text-[11px] text-slate-300 mt-1">Hỗ trợ tập Finisher siết mỡ mông đùi tối đa.</div>
     </div>
   </div>
 
   <footer class="text-center text-[10px] text-slate-600 py-2">
-    © 2026 Body365 All-In-One Plan.
+    © 2026 Body365 Advanced Food Search.
   </footer>
 
-  <!-- SCRIPT DATA VÀ XỬ LÝ -->
+  <!-- SCRIPT XỬ LÝ SEARCH KHÔNG DẤU & DỮ LIỆU CƠ SỞ -->
   <script>
+    // Hàm chuyển chữ Việt có dấu thành không dấu
+    function removeVietnameseTones(str) {
+      return str.normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/đ/g, 'd').replace(/Đ/g, 'D')
+                .toLowerCase().trim();
+    }
+
+    // DỮ LIỆU CÁC MÓN ĂN THỰC TẾ VIỆT NAM (50+ MÓN)
     const FOOD_DATABASE = [
-      { name: "Ức gà luộc (100g)", calo: 165, protein: "31g" },
+      { name: "Cơm chiên dương châu (1 đĩa)", calo: 530, protein: "14g" },
+      { name: "Cơm chiên hải sản (1 đĩa)", calo: 500, protein: "18g" },
+      { name: "Cơm gà xối mỡ (1 đĩa)", calo: 680, protein: "28g" },
+      { name: "Cơm tấm sườn nướng", calo: 627, protein: "25g" },
+      { name: "Cơm trắng (1 chén 150g)", calo: 130, protein: "2.7g" },
+      { name: "Cơm gạo lứt (1 chén 150g)", calo: 110, protein: "2.5g" },
+      { name: "Ức gà luộc / hấp (100g)", calo: 165, protein: "31g" },
       { name: "Thịt bò nạc (100g)", calo: 250, protein: "26g" },
+      { name: "Thịt heo quay (100g)", calo: 256, protein: "16g" },
       { name: "Khoai lang luộc (100g)", calo: 86, protein: "1.6g" },
       { name: "Trứng gà luộc (1 quả)", calo: 78, protein: "6g" },
-      { name: "Cơm trắng (1 chén)", calo: 130, protein: "2.7g" },
-      { name: "Cơm lứt (1 chén)", calo: 110, protein: "2.5g" },
-      { name: "Cơm tấm sườn nướng", calo: 627, protein: "25g" },
-      { name: "Phở bò (1 tô)", calo: 450, protein: "20g" },
-      { name: "Bún riêu (1 tô)", calo: 480, protein: "18g" },
-      { name: "Chuối xiêm / Chuối già (1 quả)", calo: 90, protein: "1.1g" },
-      { name: "1 Muỗng Whey Protein", calo: 120, protein: "24g" },
+      { name: "Trứng chiên / ốp la (1 quả)", calo: 110, protein: "6.3g" },
+      { name: "Phở bò chín (1 tô)", calo: 450, protein: "20g" },
+      { name: "Phở gà (1 tô)", calo: 410, protein: "22g" },
+      { name: "Bún riêu cua (1 tô)", calo: 480, protein: "18g" },
+      { name: "Bún bò Huế (1 tô)", calo: 530, protein: "24g" },
+      { name: "Bún thịt nướng (1 tô)", calo: 455, protein: "16g" },
+      { name: "Hủ tiếu Nam Vang (1 tô)", calo: 400, protein: "19g" },
+      { name: "Mì xào hải sản (1 dĩa)", calo: 580, protein: "21g" },
       { name: "Bánh mì ốp la (1 ổ 2 trứng)", calo: 380, protein: "14g" },
-      { name: "Trà sữa (1 ly)", calo: 450, protein: "1g" }
+      { name: "Bánh mì thịt chả (1 ổ)", calo: 420, protein: "15g" },
+      { name: "Bánh xèo (1 cái)", calo: 350, protein: "10g" },
+      { name: "Chuối xiêm / Chuối già (1 quả)", calo: 90, protein: "1.1g" },
+      { name: "Táo tây (1 quả)", calo: 52, protein: "0.3g" },
+      { name: "Dưa hấu (1 miếng 200g)", calo: 60, protein: "1.2g" },
+      { name: "1 Muỗng Whey Protein", calo: 120, protein: "24g" },
+      { name: "Trà sữa chân trâu (1 ly)", calo: 450, protein: "1g" },
+      { name: "Cà phê sữa đá (1 ly)", calo: 180, protein: "2g" },
+      { name: "Cà phê đen không đường (1 ly)", calo: 5, protein: "0g" },
+      { name: "Bông cải xanh luộc (100g)", calo: 34, protein: "2.8g" }
     ];
 
     function searchFood() {
-      const keyword = document.getElementById('foodSearchInput').value.toLowerCase().trim();
+      const rawInput = document.getElementById('foodSearchInput').value;
+      const cleanKeyword = removeVietnameseTones(rawInput);
       const resultContainer = document.getElementById('foodResultList');
       resultContainer.innerHTML = '';
 
-      const filtered = FOOD_DATABASE.filter(f => f.name.toLowerCase().includes(keyword));
-
-      if (filtered.length === 0) {
-        resultContainer.innerHTML = `<div class="text-[11px] text-slate-500 py-1">Không tìm thấy món trong dữ liệu!</div>`;
+      if (cleanKeyword === '') {
+        // Hiện 3 món mẫu mặc định
+        const samples = FOOD_DATABASE.slice(0, 3);
+        samples.forEach(f => renderFoodItem(f, resultContainer));
         return;
       }
 
-      filtered.forEach(f => {
-        resultContainer.innerHTML += `
-          <div class="bg-slate-900/90 p-2 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
-            <span class="font-bold text-slate-200">${f.name}</span>
-            <div class="text-right">
-              <span class="font-black text-emerald-400">${f.calo} Calo</span>
-              <span class="text-[10px] text-amber-300 block">Đạm: ${f.protein}</span>
-            </div>
-          </div>
-        `;
+      const filtered = FOOD_DATABASE.filter(f => {
+        const cleanName = removeVietnameseTones(f.name);
+        return cleanName.includes(cleanKeyword);
       });
+
+      if (filtered.length === 0) {
+        resultContainer.innerHTML = `<div class="text-[11px] text-slate-500 py-1 italic">Không thấy món "${rawInput}". Thử gõ từ ngắn hơn xem sao nha anh!</div>`;
+        return;
+      }
+
+      filtered.forEach(f => renderFoodItem(f, resultContainer));
+    }
+
+    function renderFoodItem(item, container) {
+      container.innerHTML += `
+        <div class="bg-slate-900/90 p-2 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
+          <span class="font-bold text-slate-200">${item.name}</span>
+          <div class="text-right">
+            <span class="font-black text-emerald-400">${item.calo} Calo</span>
+            <span class="text-[10px] text-amber-300 block">Đạm: ${item.protein}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function quickSearch(keyword) {
+      document.getElementById('foodSearchInput').value = keyword;
+      searchFood();
     }
 
     function calculatePlan() {
@@ -378,6 +392,7 @@
       document.getElementById(`tab${num}`).className = "py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold shadow-md";
     }
 
+    // Khởi tạo
     searchFood();
     calculatePlan();
   </script>
