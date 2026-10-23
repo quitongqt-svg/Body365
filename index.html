@@ -15,7 +15,6 @@
     // LINK DÂY KHÁNG LỰC SHOPEE CỦA ANH QUÍ
     const SHOPEE_AFF_LINK = "https://s.shopee.vn/LnxoGaYaQ";
 
-    // HÀM MỞ LINK KHI NGƯỜI DÙNG BẤM NÚT CHỦ ĐỘNG (AN TOÀN 100% POLICY)
     function goShopee() {
       window.open(SHOPEE_AFF_LINK, '_blank');
     }
@@ -45,7 +44,7 @@
     <span class="text-xs font-black bg-white text-emerald-700 px-2.5 py-1.5 rounded-xl shrink-0 ml-2 shadow">Xem Shopee</span>
   </div>
 
-  <!-- 1. Ô TRA CỨU CALO MÓN ĂN THÔNG MINH (KẾT HỢP TÌM KHÔNG DẤU) -->
+  <!-- 1. Ô TRA CỨU CALO MÓN ĂN THÔNG MINH -->
   <div class="glass p-3.5 rounded-2xl border border-amber-500/50 space-y-2.5">
     <div class="font-extrabold text-xs text-amber-400 uppercase tracking-wider flex items-center justify-between">
       <span class="flex items-center gap-1.5">🔍 Tra Cứu Calo Món Ăn Việt Nam:</span>
@@ -69,7 +68,7 @@
     <div id="foodResultList" class="space-y-1.5 max-h-40 overflow-y-auto pt-1"></div>
   </div>
 
-  <!-- 2. BỘ MÁY TÍNH CALO & XUẤT LỊCH TẬP TỰ ĐỘNG THEO SỐ THÁNG/NGÀY -->
+  <!-- 2. BỘ MÁY TÍNH CALO & XUẤT LỊCH TẬP THÔNG MINH KHI ĐỔI SỐ KG GIẢM -->
   <div class="glass p-4 rounded-2xl border border-emerald-500/40 space-y-3">
     <div class="font-extrabold text-xs text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
       <span>📐</span>
@@ -110,7 +109,7 @@
       📊 TÍNH LỘ TRÌNH & XUẤT LỊCH TẬP CHI TIẾT
     </button>
 
-    <!-- KẾT QUẢ HIỂN THỊ CẬP NHẬT KÈM BẢNG LỊCH TẬP TUẦN -->
+    <!-- KẾT QUẢ HIỂN THỊ DỘNG THEO SỐ KG GIẢM -->
     <div id="resultBox" class="hidden space-y-3 pt-1">
       <div class="bg-slate-900/90 rounded-xl p-3 border border-emerald-500/50 space-y-2 text-xs">
         <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
@@ -122,85 +121,19 @@
           <span id="resCalo" class="font-extrabold text-emerald-400 text-sm">0 Calo/ngày</span>
         </div>
         <div class="flex justify-between items-center">
-          <span class="text-slate-400">Thời gian đạt mục tiêu:</span>
+          <span class="text-slate-400">Thời gian hoàn thành:</span>
           <span id="resTime" class="font-extrabold text-sky-400">0 Tháng (0 Ngày)</span>
         </div>
       </div>
 
-      <!-- BẢNG TỰ ĐỘNG XUẤT LỊCH TẬP CHI TIẾT NGHỈ/TẬP TRONG SUỐT LỘ TRÌNH -->
+      <!-- BẢNG LỊCH TẬP THAY ĐỔI DỰA TRÊN SỐ KG GIẢM -->
       <div class="bg-slate-900 p-3.5 rounded-2xl border border-sky-500/50 space-y-2.5 shadow-lg">
         <div class="font-extrabold text-xs text-sky-400 flex justify-between items-center border-b border-slate-800 pb-2">
-          <span>🗓️ LỊCH TẬP CHI TIẾT MỖI TUẦN TRONG LỘ TRÌNH:</span>
-          <span class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-md font-bold">Chuẩn Y Khoa</span>
+          <span>🗓️ LỊCH TẬP PHÙ HỢP CẤP ĐỘ GIẢM CÂN:</span>
+          <span id="resLevelBadge" class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-md font-bold">Cấp Độ Giảm Mỡ</span>
         </div>
-        <p class="text-[10px] text-slate-300 leading-relaxed">
-          Áp dụng đều đặn lịch tập bên dưới xuyên suốt thời gian lộ trình để cơ bắp phục hồi đúng quy tắc, vừa giảm mỡ vừa không bị quá sức hay đau khớp:
-        </p>
 
-        <div class="space-y-1.5 text-xs">
-          <!-- THỨ 2 -->
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-emerald-400">Thứ 2: Tập Đùi - Mông (Cơ Lớn)</span>
-              <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
-            </div>
-            <p class="text-[10px] text-slate-400">• Squat / Jump Squat (4 Sets) + Bulgarian Split Squat (3 Sets) đeo dây kháng lực.</p>
-          </div>
-
-          <!-- THỨ 3 -->
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-sky-400">Thứ 3: Tập Ngực - Tay Sau - Bụng</span>
-              <span class="text-[9px] bg-sky-500/20 text-sky-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
-            </div>
-            <p class="text-[10px] text-slate-400">• Push-Ups hít đất (4 Sets) + Diamond Push-Ups (3 Sets) + Plank 45s (4 Sets).</p>
-          </div>
-
-          <!-- THỨ 4 -->
-          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/40 space-y-0.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-rose-400">Thứ 4: NGHỈ HOÀN TOÀN (Hoặc Đi Bộ)</span>
-              <span class="text-[9px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">Ngày Nghỉ</span>
-            </div>
-            <p class="text-[10px] text-slate-300">• Để cơ đùi & ngực phục hồi 48h. Đi bộ nhẹ 20 phút xả Axit Lactic.</p>
-          </div>
-
-          <!-- THỨ 5 -->
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-amber-400">Thứ 5: Tập Gân & Thần Kinh (Isometric)</span>
-              <span class="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
-            </div>
-            <p class="text-[10px] text-slate-400">• Giữ tĩnh gồng 100% lực (5-10s) + Kéo dây kháng lực nặng rep thấp giúp gân chắc, không to người.</p>
-          </div>
-
-          <!-- THỨ 6 -->
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-purple-400">Thứ 6: Tập Bắp Chân & Finisher 7 Phút</span>
-              <span class="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
-            </div>
-            <p class="text-[10px] text-slate-400">• Standing Calf Raises (4 Sets x 20 Reps) + Bài tập Finisher (Burpees, Mountain Climbers) xả calo.</p>
-          </div>
-
-          <!-- THỨ 7 -->
-          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-teal-400">Thứ 7: Đá Bóng Giao Hữu / Vận Động Tự Do</span>
-              <span class="text-[9px] bg-teal-500/20 text-teal-300 px-1.5 py-0.5 rounded font-bold">Ngày Thể Thao</span>
-            </div>
-            <p class="text-[10px] text-slate-400">• Chạy sân bóng, tranh chấp bóng dẻo dai nhờ gân củng cố cả tuần.</p>
-          </div>
-
-          <!-- CHỦ NHẬT -->
-          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/40 space-y-0.5">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-rose-400">Chủ Nhật: NGHỈ PHỤC HỒI NĂNG LƯỢNG</span>
-              <span class="text-[9px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">Ngày Nghỉ</span>
-            </div>
-            <p class="text-[10px] text-slate-300">• Ngủ đủ 8 tiếng, ăn đủ đạm để tái tạo lại toàn bộ sợi cơ cho tuần mới.</p>
-          </div>
-        </div>
+        <div id="dynamicScheduleContent" class="space-y-1.5 text-xs"></div>
 
         <button onclick="goShopee()" class="w-full mt-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-xs rounded-xl text-center active:scale-95 transition shadow-md">
           🎗️ Sắm Bộ Dây Kháng Lực Để Theo Đúng Lịch Tập Này →
@@ -217,11 +150,11 @@
     <div class="grid grid-cols-2 gap-2 text-[11px]">
       <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-800">
         <div class="font-bold text-amber-400">🛑 Cơ Lớn (Nghỉ 48h-72h)</div>
-        <div class="text-[10px] text-slate-300 mt-1">• <b>Đùi/Mông, Lưng, Ngực:</b> Tập 2 buổi/tuần để cơ phục hồi và phát triển.</div>
+        <div class="text-[10px] text-slate-300 mt-1">• <b>Đùi/Mông, Lưng, Ngực:</b> Tập 2 buổi/tuần để cơ phục hồi.</div>
       </div>
       <div class="bg-slate-900/80 p-2 rounded-xl border border-slate-800">
         <div class="font-bold text-emerald-400">⚡ Cơ Nhỏ (Tập Thường Xuyên)</div>
-        <div class="text-[10px] text-slate-300 mt-1">• <b>Bụng, Bắp Chân, Vai:</b> Hồi phục nhanh, tập 4-5 buổi/tuần hoặc tập cách ngày.</div>
+        <div class="text-[10px] text-slate-300 mt-1">• <b>Bụng, Bắp Chân, Vai:</b> Hồi phục nhanh, tập cách ngày.</div>
       </div>
     </div>
   </div>
@@ -234,7 +167,7 @@
     <button id="tab4" onclick="switchTab(4)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">💪 Tập Gân</button>
   </div>
 
-  <!-- TAB 1: TẤT CẢ BÀI TẬP (GIỮ NGUYÊN 100% ĐẦY ĐỦ CÁC BÀI TẬP NGUYÊN BẢN) -->
+  <!-- TAB 1: TẤT CẢ BÀI TẬP (GIỮ NGUYÊN 100% CÁC BÀI TẬP NGUYÊN BẢN) -->
   <div id="content1" class="space-y-2">
     
     <div class="text-xs font-extrabold text-emerald-400 px-1 pt-1">🤸 PHẦN 1: BÀI TẬP BODYWEIGHT & DÂY KHÁNG LỰC (TẠI NHÀ)</div>
@@ -487,7 +420,7 @@
     © 2026 Body365 Ultimate Safe Fitness System.
   </footer>
 
-  <!-- SCRIPT CƠ SỞ & HÀM XỬ LÝ SEARCH / TÍNH LỘ TRÌNH -->
+  <!-- SCRIPT CƠ SỞ & THUẬT TOÁN ĐỔI LỊCH TẬP KHÁC NHAU THEO SỐ KG -->
   <script>
     function removeVietnameseTones(str) {
       return str.normalize('NFD')
@@ -505,25 +438,9 @@
       { name: "Cơm gạo lứt (1 chén 150g)", calo: 110, protein: "2.5g" },
       { name: "Ức gà luộc / hấp (100g)", calo: 165, protein: "31g" },
       { name: "Thịt bò nạc (100g)", calo: 250, protein: "26g" },
-      { name: "Thịt heo quay (100g)", calo: 256, protein: "16g" },
       { name: "Khoai lang luộc (100g)", calo: 86, protein: "1.6g" },
       { name: "Trứng gà luộc (1 quả)", calo: 78, protein: "6g" },
-      { name: "Trứng chiên / ốp la (1 quả)", calo: 110, protein: "6.3g" },
-      { name: "Phở bò chín (1 tô)", calo: 450, protein: "20g" },
-      { name: "Phở gà (1 tô)", calo: 410, protein: "22g" },
-      { name: "Bún riêu cua (1 tô)", calo: 480, protein: "18g" },
-      { name: "Bún bò Huế (1 tô)", calo: 530, protein: "24g" },
-      { name: "Bún thịt nướng (1 tô)", calo: 455, protein: "16g" },
-      { name: "Hủ tiếu Nam Vang (1 tô)", calo: 400, protein: "19g" },
-      { name: "Mì xào hải sản (1 dĩa)", calo: 580, protein: "21g" },
-      { name: "Bánh mì ốp la (1 ổ 2 trứng)", calo: 380, protein: "14g" },
-      { name: "Bánh mì thịt chả (1 ổ)", calo: 420, protein: "15g" },
-      { name: "Bánh xèo (1 cái)", calo: 350, protein: "10g" },
-      { name: "Chuối xiêm / Chuối già (1 quả)", calo: 90, protein: "1.1g" },
-      { name: "1 Muỗng Whey Protein", calo: 120, protein: "24g" },
-      { name: "Trà sữa chân trâu (1 ly)", calo: 450, protein: "1g" },
-      { name: "Cà phê đen không đường (1 ly)", calo: 5, protein: "0g" },
-      { name: "Bông cải xanh luộc (100g)", calo: 34, protein: "2.8g" }
+      { name: "Phở bò chín (1 tô)", calo: 450, protein: "20g" }
     ];
 
     function searchFood() {
@@ -538,16 +455,11 @@
         return;
       }
 
-      const filtered = FOOD_DATABASE.filter(f => {
-        const cleanName = removeVietnameseTones(f.name);
-        return cleanName.includes(cleanKeyword);
-      });
-
+      const filtered = FOOD_DATABASE.filter(f => removeVietnameseTones(f.name).includes(cleanKeyword));
       if (filtered.length === 0) {
-        resultContainer.innerHTML = `<div class="text-[11px] text-slate-500 py-1 italic">Không tìm thấy món "${rawInput}". Thử gõ từ ngắn hơn nhé anh!</div>`;
+        resultContainer.innerHTML = `<div class="text-[11px] text-slate-500 py-1 italic">Không tìm thấy món "${rawInput}". Thử gõ từ ngắn hơn nhé!</div>`;
         return;
       }
-
       filtered.forEach(f => renderFoodItem(f, resultContainer));
     }
 
@@ -590,6 +502,51 @@
       document.getElementById('resWeightDiff').innerText = `${weightDiff.toFixed(1)} kg`;
       document.getElementById('resCalo').innerText = `${targetCalo.toLocaleString()} Calo / ngày`;
       document.getElementById('resTime').innerText = `~ ${months} Tháng (${totalDays} Ngày)`;
+
+      // TỰ ĐỘNG LẬP LỊCH TẬP KHÁC NHAU THEO SỐ KG GIẢM
+      const scheduleContainer = document.getElementById('dynamicScheduleContent');
+      const badge = document.getElementById('resLevelBadge');
+
+      if (weightDiff <= 5) {
+        badge.innerText = "Giảm Nhẹ (3-4 buổi/tuần)";
+        badge.className = "text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md font-bold";
+        
+        scheduleContainer.innerHTML = `
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-emerald-400">Thứ 2:</b> Tập Đùi Mông nhẹ nhàng (Squat + Lunges 3 Sets).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/30"><b class="text-rose-400">Thứ 3:</b> NGHỈ PHỤC HỒI (Đi bộ nhẹ 20 phút).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-sky-400">Thứ 4:</b> Tập Ngực, Tay Sau & Bụng (Push-Ups, Plank).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/30"><b class="text-rose-400">Thứ 5:</b> NGHỈ PHỤC HỒI.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-amber-400">Thứ 6:</b> Tập Gân & Thần Kinh (Isometric giữ tĩnh nhẹ).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-teal-400">Thứ 7:</b> Đá bóng nhẹ / Vận động tự do.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/30"><b class="text-rose-400">Chủ Nhật:</b> NGHỈ HOÀN TOÀN.</div>
+        `;
+      } else if (weightDiff <= 10) {
+        badge.innerText = "Giảm Vừa (5 buổi/tuần)";
+        badge.className = "text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-md font-bold";
+
+        scheduleContainer.innerHTML = `
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-emerald-400">Thứ 2:</b> Tập Đùi Mông Nâng Cao (Squat dây kháng lực + Bulgarian Split Squat).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-sky-400">Thứ 3:</b> Tập Ngực - Tay Sau (Push-Ups 4 Sets + Diamond Push-Ups).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/30"><b class="text-rose-400">Thứ 4:</b> NGHỈ PHỤC HỒI CƠ LỚN.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-amber-400">Thứ 5:</b> Tập Gân & Thần Kinh (Isometric + Plyometrics Bộc Phát Lò Xo).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-purple-400">Thứ 6:</b> Bụng & Bắp Chân + Bài tập Finisher 7 phút xả calo.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-teal-400">Thứ 7:</b> Đá bóng giao hữu / Chạy bộ.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/30"><b class="text-rose-400">Chủ Nhật:</b> NGHỈ PHỤC HỒI.</div>
+        `;
+      } else {
+        badge.innerText = "Ép Mỡ Tốc Độ Cao (5-6 buổi/tuần + Ăn 16:8)";
+        badge.className = "text-[9px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-md font-bold";
+
+        scheduleContainer.innerHTML = `
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-emerald-400">Thứ 2:</b> Cường độ cao: Đùi Mông + Finisher 7 phút đốt mỡ.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-sky-400">Thứ 3:</b> Cường độ cao: Ngực, Tay Sau, Bụng (Push-Ups + Plank 60s).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-amber-400">Thứ 4:</b> Tập Gân & Lực Bộc Phát (Plyometrics Jump Squats).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/30"><b class="text-rose-400">Thứ 5:</b> NGHỈ PHỤC HỒI CHỦ ĐỘNG (Chỉ đi bộ 30p).</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-purple-400">Thứ 6:</b> Toàn Thân Cường Độ Cao + Finisher Burpees 7 phút.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800"><b class="text-teal-400">Thứ 7:</b> Đá bóng / Chạy Cardio dồn sức.</div>
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/30"><b class="text-rose-400">Chủ Nhật:</b> NGHỈ HOÀN TOÀN + Bắt buộc tuân thủ Lịch ăn 16:8.</div>
+        `;
+      }
 
       document.getElementById('resultBox').classList.remove('hidden');
       document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
