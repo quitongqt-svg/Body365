@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Body365 Mega Full - All-In-One Fitness & 16:8 Plan</title>
+  <title>Body365 Mega Full - Chuyên Nghiệp & Chuẩn Chính Sách</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
     .glass { background: rgba(30, 41, 59, 0.85); backdrop-filter: blur(12px); }
@@ -15,7 +15,7 @@
     // LINK DÂY KHÁNG LỰC SHOPEE CỦA ANH QUÍ
     const SHOPEE_AFF_LINK = "https://s.shopee.vn/LnxoGaYaQ";
 
-    // HÀM MỞ LINK KHI NGƯỜI DÙNG BẤM NÚT CHỦ ĐỘNG (AN TOÀN 100%)
+    // HÀM MỞ LINK KHI NGƯỜI DÙNG BẤM NÚT CHỦ ĐỘNG (AN TOÀN 100% POLICY)
     function goShopee() {
       window.open(SHOPEE_AFF_LINK, '_blank');
     }
@@ -24,17 +24,17 @@
 <body class="bg-slate-950 text-slate-100 min-h-screen p-3 space-y-3 max-w-md mx-auto">
 
   <!-- HEADER -->
-  <div class="glass p-3 rounded-2xl border border-slate-800 flex justify-between items-center sticky top-0 z-50">
+  <div class="glass p-3 rounded-2xl border border-slate-800 flex justify-between items-center sticky top-0 z-50 shadow-xl">
     <div class="flex items-center space-x-2">
       <span class="text-xl">🔥</span>
-      <span class="font-extrabold text-sm text-emerald-400">Body 365 Mega Plan</span>
+      <span class="font-black text-sm text-emerald-400 tracking-wide">Body 365 Pro</span>
     </div>
     <button onclick="goShopee()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-[10px] px-3 py-1.5 rounded-xl transition shadow-lg active:scale-95 animate-pulse">
       🛒 Mua Dây Kháng Lực →
     </button>
   </div>
 
-  <!-- BANNER SHOPEE -->
+  <!-- BANNER SHOPEE CHỦ ĐỘNG BẤM NÚT -->
   <div onclick="goShopee()" class="cursor-pointer bg-gradient-to-r from-emerald-500 via-teal-600 to-indigo-600 p-3 rounded-2xl text-white shadow-lg flex justify-between items-center active:scale-95 transition border border-emerald-400/30">
     <div>
       <div class="font-extrabold text-xs uppercase flex items-center gap-1">
@@ -69,11 +69,11 @@
     <div id="foodResultList" class="space-y-1.5 max-h-40 overflow-y-auto pt-1"></div>
   </div>
 
-  <!-- 2. BỘ MÁY TÍNH CALO & LỘ TRÌNH GIẢM CÂN -->
+  <!-- 2. BỘ MÁY TÍNH CALO & XUẤT LỊCH TẬP TỰ ĐỘNG THEO SỐ THÁNG/NGÀY -->
   <div class="glass p-4 rounded-2xl border border-emerald-500/40 space-y-3">
     <div class="font-extrabold text-xs text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
       <span>📐</span>
-      <span>Máy Tính Calo & Lộ Trình Giảm Cân:</span>
+      <span>Máy Tính Calo & Lộ Trình Giảm Cân Cá Nhân:</span>
     </div>
 
     <div class="grid grid-cols-2 gap-2 text-xs">
@@ -107,21 +107,104 @@
 
     <button onclick="calculatePlan()" 
             class="w-full py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-xs rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition">
-      📊 TÍNH LỘ TRÌNH GIẢM CÂN
+      📊 TÍNH LỘ TRÌNH & XUẤT LỊCH TẬP CHI TIẾT
     </button>
 
-    <div id="resultBox" class="hidden bg-slate-900/90 rounded-xl p-3 border border-emerald-500/50 space-y-2 text-xs">
-      <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-        <span class="text-slate-400">Cần giảm:</span>
-        <span id="resWeightDiff" class="font-extrabold text-amber-400">0 kg</span>
+    <!-- KẾT QUẢ HIỂN THỊ CẬP NHẬT KÈM BẢNG LỊCH TẬP TUẦN -->
+    <div id="resultBox" class="hidden space-y-3 pt-1">
+      <div class="bg-slate-900/90 rounded-xl p-3 border border-emerald-500/50 space-y-2 text-xs">
+        <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+          <span class="text-slate-400">Cần giảm tổng cộng:</span>
+          <span id="resWeightDiff" class="font-extrabold text-amber-400">0 kg</span>
+        </div>
+        <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+          <span class="text-slate-400">Calo nạp mỗi ngày:</span>
+          <span id="resCalo" class="font-extrabold text-emerald-400 text-sm">0 Calo/ngày</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400">Thời gian đạt mục tiêu:</span>
+          <span id="resTime" class="font-extrabold text-sky-400">0 Tháng (0 Ngày)</span>
+        </div>
       </div>
-      <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
-        <span class="text-slate-400">Calo nạp mỗi ngày:</span>
-        <span id="resCalo" class="font-extrabold text-emerald-400 text-sm">0 Calo/ngày</span>
-      </div>
-      <div class="flex justify-between items-center">
-        <span class="text-slate-400">Thời gian đạt mục tiêu:</span>
-        <span id="resTime" class="font-extrabold text-sky-400">0 Tháng (0 Ngày)</span>
+
+      <!-- BẢNG TỰ ĐỘNG XUẤT LỊCH TẬP CHI TIẾT NGHỈ/TẬP TRONG SUỐT LỘ TRÌNH -->
+      <div class="bg-slate-900 p-3.5 rounded-2xl border border-sky-500/50 space-y-2.5 shadow-lg">
+        <div class="font-extrabold text-xs text-sky-400 flex justify-between items-center border-b border-slate-800 pb-2">
+          <span>🗓️ LỊCH TẬP CHI TIẾT MỖI TUẦN TRONG LỘ TRÌNH:</span>
+          <span class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-md font-bold">Chuẩn Y Khoa</span>
+        </div>
+        <p class="text-[10px] text-slate-300 leading-relaxed">
+          Áp dụng đều đặn lịch tập bên dưới xuyên suốt thời gian lộ trình để cơ bắp phục hồi đúng quy tắc, vừa giảm mỡ vừa không bị quá sức hay đau khớp:
+        </p>
+
+        <div class="space-y-1.5 text-xs">
+          <!-- THỨ 2 -->
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-emerald-400">Thứ 2: Tập Đùi - Mông (Cơ Lớn)</span>
+              <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
+            </div>
+            <p class="text-[10px] text-slate-400">• Squat / Jump Squat (4 Sets) + Bulgarian Split Squat (3 Sets) đeo dây kháng lực.</p>
+          </div>
+
+          <!-- THỨ 3 -->
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-sky-400">Thứ 3: Tập Ngực - Tay Sau - Bụng</span>
+              <span class="text-[9px] bg-sky-500/20 text-sky-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
+            </div>
+            <p class="text-[10px] text-slate-400">• Push-Ups hít đất (4 Sets) + Diamond Push-Ups (3 Sets) + Plank 45s (4 Sets).</p>
+          </div>
+
+          <!-- THỨ 4 -->
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/40 space-y-0.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-400">Thứ 4: NGHỈ HOÀN TOÀN (Hoặc Đi Bộ)</span>
+              <span class="text-[9px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">Ngày Nghỉ</span>
+            </div>
+            <p class="text-[10px] text-slate-300">• Để cơ đùi & ngực phục hồi 48h. Đi bộ nhẹ 20 phút xả Axit Lactic.</p>
+          </div>
+
+          <!-- THỨ 5 -->
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-amber-400">Thứ 5: Tập Gân & Thần Kinh (Isometric)</span>
+              <span class="text-[9px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
+            </div>
+            <p class="text-[10px] text-slate-400">• Giữ tĩnh gồng 100% lực (5-10s) + Kéo dây kháng lực nặng rep thấp giúp gân chắc, không to người.</p>
+          </div>
+
+          <!-- THỨ 6 -->
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-purple-400">Thứ 6: Tập Bắp Chân & Finisher 7 Phút</span>
+              <span class="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-bold">Ngày Tập</span>
+            </div>
+            <p class="text-[10px] text-slate-400">• Standing Calf Raises (4 Sets x 20 Reps) + Bài tập Finisher (Burpees, Mountain Climbers) xả calo.</p>
+          </div>
+
+          <!-- THỨ 7 -->
+          <div class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 space-y-0.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-teal-400">Thứ 7: Đá Bóng Giao Hữu / Vận Động Tự Do</span>
+              <span class="text-[9px] bg-teal-500/20 text-teal-300 px-1.5 py-0.5 rounded font-bold">Ngày Thể Thao</span>
+            </div>
+            <p class="text-[10px] text-slate-400">• Chạy sân bóng, tranh chấp bóng dẻo dai nhờ gân củng cố cả tuần.</p>
+          </div>
+
+          <!-- CHỦ NHẬT -->
+          <div class="p-2.5 rounded-xl bg-slate-950/80 border border-rose-500/40 space-y-0.5">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-rose-400">Chủ Nhật: NGHỈ PHỤC HỒI NĂNG LƯỢNG</span>
+              <span class="text-[9px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">Ngày Nghỉ</span>
+            </div>
+            <p class="text-[10px] text-slate-300">• Ngủ đủ 8 tiếng, ăn đủ đạm để tái tạo lại toàn bộ sợi cơ cho tuần mới.</p>
+          </div>
+        </div>
+
+        <button onclick="goShopee()" class="w-full mt-2 py-2.5 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-xs rounded-xl text-center active:scale-95 transition shadow-md">
+          🎗️ Sắm Bộ Dây Kháng Lực Để Theo Đúng Lịch Tập Này →
+        </button>
       </div>
     </div>
   </div>
@@ -151,7 +234,7 @@
     <button id="tab4" onclick="switchTab(4)" class="py-2.5 rounded-xl bg-slate-900 text-slate-400 border border-slate-800">💪 Tập Gân</button>
   </div>
 
-  <!-- TAB 1: TẤT CẢ BÀI TẬP (DÀI & CHI TIẾT NHẤT) -->
+  <!-- TAB 1: TẤT CẢ BÀI TẬP (GIỮ NGUYÊN 100% ĐẦY ĐỦ CÁC BÀI TẬP NGUYÊN BẢN) -->
   <div id="content1" class="space-y-2">
     
     <div class="text-xs font-extrabold text-emerald-400 px-1 pt-1">🤸 PHẦN 1: BÀI TẬP BODYWEIGHT & DÂY KHÁNG LỰC (TẠI NHÀ)</div>
@@ -300,7 +383,7 @@
 
   </div>
 
-  <!-- TAB 2: CHẾ ĐỘ ĂN 16:8 KHOA HỌC -->
+  <!-- TAB 2: CHẾ ĐỘ ĂN 16:8 -->
   <div id="content2" class="space-y-2 hidden">
     <div class="glass p-3 rounded-2xl border border-sky-500/30 flex justify-between items-center">
       <div>
@@ -359,7 +442,7 @@
     </div>
   </div>
 
-  <!-- TAB 4: PHƯƠNG PHÁP TẬP GÂN & THẦN KINH (KHÔNG BỊ TO NGƯỜI) -->
+  <!-- TAB 4: PHƯƠNG PHÁP TẬP GÂN & THẦN KINH -->
   <div id="content4" class="space-y-2 hidden">
     <div class="glass p-3 rounded-2xl border border-amber-500/40 space-y-1">
       <div class="font-extrabold text-xs text-amber-400 flex items-center gap-1">
@@ -404,7 +487,7 @@
     © 2026 Body365 Ultimate Safe Fitness System.
   </footer>
 
-  <!-- SCRIPT CƠ SỞ & XỬ LÝ SEARCH HƠN 50+ MÓN ĂN -->
+  <!-- SCRIPT CƠ SỞ & HÀM XỬ LÝ SEARCH / TÍNH LỘ TRÌNH -->
   <script>
     function removeVietnameseTones(str) {
       return str.normalize('NFD')
@@ -509,6 +592,7 @@
       document.getElementById('resTime').innerText = `~ ${months} Tháng (${totalDays} Ngày)`;
 
       document.getElementById('resultBox').classList.remove('hidden');
+      document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
     }
 
     function switchTab(num) {
@@ -521,7 +605,6 @@
     }
 
     searchFood();
-    calculatePlan();
   </script>
 
 </body>
